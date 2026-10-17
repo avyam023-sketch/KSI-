@@ -730,9 +730,9 @@ address { font-style: normal; }
 .drawer__actions { display: grid; gap: 10px; }
 .enq-empty { padding: 18px; margin-bottom: 16px; }
 .finder { margin: 0 0 24px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
-.finder__toggle { width: 100%; display: flex; align-items: center; gap: 10px; padding: 14px 16px; border: 0; background: none; font-weight: 700; font-size: 15px; text-align: left; }
-.finder__toggle svg { width: 18px; height: 18px; color: var(--brand); transition: transform 0.35s var(--ease); }
-.finder.is-open .finder__toggle svg { transform: rotate(45deg); }
+.finder__toggle { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px; border: 0; background: none; font-weight: 700; font-size: 15px; text-align: left; }
+.finder__toggle svg { width: 18px; height: 18px; color: var(--muted); transition: transform 0.35s var(--ease); }
+.finder.is-open .finder__toggle svg { transform: rotate(180deg); }
 .finder__panel { padding: 0 16px 16px; }
 .search--sm { flex: none; width: 100%; }
 .search--sm input { height: 42px; font-size: 15px; background: var(--bg); }

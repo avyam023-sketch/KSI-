@@ -13,6 +13,7 @@ const icon = {
   phone: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 3.5l2.6.4 1.3 4-1.9 1.4a12 12 0 0 0 6.1 6.1l1.4-1.9 4 1.3.4 2.6c.1.9-.6 1.7-1.5 1.7C10.3 19.1 4.9 13.7 4.9 5c0-.9.8-1.6 1.7-1.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
   mail: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>',
   whatsapp: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.4 12.7L3.5 20.5l4.4-1.1A8.5 8.5 0 1 0 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.2 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c-.1.2-.1.4 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5 0l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.6 0 .9-.6 1.7-1.6 1.9-1 .2-2.6-.2-4.3-1.7-1.7-1.5-2.6-3.1-2.6-4.2 0-.6.2-1 .4-1.3z" fill="currentColor"/></svg>',
+  chevron: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   search: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M16 16l4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
   pin: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11z" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="10" r="2.3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>',
 };
@@ -174,7 +175,7 @@ function drawer(data, depth) {
   <div class="drawer__body">
     <ul class="enq-list" data-enq-list></ul>
     <section class="finder" data-finder aria-label="Add products">
-      <button type="button" class="finder__toggle" data-finder-toggle aria-expanded="true">${icon.plus}<span>Add products</span></button>
+      <button type="button" class="finder__toggle" data-finder-toggle aria-expanded="true"><span>Add products</span>${icon.chevron}</button>
       <div class="finder__panel" data-finder-panel>
         <label class="search search--sm">
           ${icon.search}
