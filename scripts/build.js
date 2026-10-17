@@ -49,6 +49,7 @@ if (problems.length) { console.error(problems.join("\n")); process.exit(1); }
 
 rmrf(DIST);
 copyDir(path.join(SRC, "assets"), path.join(DIST, "assets"));
+fs.writeFileSync(path.join(DIST, ".nojekyll"), "");
 for (const f of ["robots.txt", "favicon.svg"]) if (fs.existsSync(path.join(SRC, f))) fs.copyFileSync(path.join(SRC, f), path.join(DIST, f));
 
 const built = [];
