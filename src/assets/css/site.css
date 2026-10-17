@@ -124,9 +124,6 @@ address { font-style: normal; }
 .icon-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-2); background: var(--surface); }
 .icon-btn svg { width: 20px; height: 20px; }
 
-/* ---------- Progress ---------- */
-.progress { position: fixed; inset: 0 0 auto 0; height: 2px; z-index: 120; pointer-events: none; }
-.progress span { display: block; height: 100%; background: var(--brand); transform-origin: 0 50%; transform: scaleX(0); }
 
 /* ---------- Header ---------- */
 .site-header {

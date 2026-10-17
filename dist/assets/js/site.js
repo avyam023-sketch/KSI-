@@ -46,16 +46,13 @@
 
   /* ---------- Header: solid after scroll, hide on scroll down ---------- */
   const header = $("[data-header]");
-  const bar = $(".progress span");
   let lastY = window.scrollY;
   function onScroll() {
     const y = window.scrollY;
-    const max = document.documentElement.scrollHeight - window.innerHeight;
     header.classList.toggle("is-solid", y > 24);
     const hide = y > lastY && y > 400 && !document.body.classList.contains("menu-open");
     header.classList.toggle("is-hidden", hide);
     document.body.classList.toggle("header-hidden", hide);
-    if (bar) bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
     lastY = y;
   }
   window.addEventListener("scroll", onScroll, { passive: true });

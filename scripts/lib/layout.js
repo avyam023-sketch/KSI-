@@ -63,7 +63,6 @@ function header(data, depth, active) {
   const a = (k) => (active === k ? ' aria-current="page"' : "");
   return `
 <a class="skip" href="#main">Skip to content</a>
-<div class="progress" aria-hidden="true"><span></span></div>
 <header class="site-header" data-header>
   <div class="site-header__inner">
     <a class="brand" href="${r}index.html" aria-label="KSI Plus — home"><img src="${r}assets/img/brand/ksi-plus-logo.svg" alt="KSI Plus" width="112" height="41"></a>
