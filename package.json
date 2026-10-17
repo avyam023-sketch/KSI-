@@ -1,0 +1,11 @@
+{
+  "name": "ksi-plus-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "KSI Plus — scroll-driven marketing site and product catalogue",
+  "scripts": {
+    "build": "node scripts/build.js",
+    "serve": "npx --yes http-server dist -p 8080 -c-1",
+    "dev": "npm run build && npm run serve"
+  }
+}
