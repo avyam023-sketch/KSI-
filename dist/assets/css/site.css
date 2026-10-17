@@ -736,7 +736,7 @@ address { font-style: normal; }
 .finder__panel { padding: 0 16px 16px; }
 .search--sm { flex: none; width: 100%; }
 .search--sm input { height: 42px; font-size: 15px; background: var(--bg); }
-.finder__types { display: flex; gap: 6px; margin: 12px -16px 4px; padding: 0 16px 4px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; }
+.finder__types { display: flex; gap: 6px; margin: 12px -16px 4px; padding: 0 16px 4px; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity; scroll-padding-inline: 16px; }
 .finder__types::-webkit-scrollbar { display: none; }
 .chip--sm { height: 34px; padding: 0 12px; font-size: 13px; border-color: var(--line-2); background: var(--bg); scroll-snap-align: start; }
 .chip--sm span { font-size: 11px; }
