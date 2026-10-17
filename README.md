@@ -62,3 +62,7 @@ To add a product, add an entry to `products` in `data.js`, drop `<id>.webp` into
 - Long descriptions tightened.
 
 All specifications are as printed in the catalogue.
+
+## Previews
+
+Desktop screenshots of the built site are in `docs/previews/`.
