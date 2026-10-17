@@ -7,6 +7,28 @@
   const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
   const fmtIN = (n) => Math.round(n).toLocaleString("en-IN");
 
+  /* Hero drawing geometry, in the photo's pixel space (see heroDrawing() in scripts/pages/home.js). */
+  const H = { top: 104, floor: 366, cut: 275, lift: 90, minMM: 690, maxMM: 1120 };
+  const hero = {
+    upper: $(".t-upper"), strip: $(".t-strip"), ext: $(".d-ext--top"), line: $(".d-h"),
+    tickTop: $(".d-tick-top"), label: $(".d-label--h"), vals: $$("[data-h-svg], [data-h-val]"),
+  };
+  // Raise the table top by d units: the upper half moves up and a 1px slice of the
+  // column is stretched to fill the gap, so the column appears to extend.
+  function setLift(d) {
+    hero.upper.setAttribute("transform", `translate(0 ${-d})`);
+    hero.strip.setAttribute("transform", d > 0.2 ? `translate(0 ${H.cut - d}) scale(1 ${d}) translate(0 ${-(H.cut - 1)})` : "scale(1 0)");
+    const top = H.top - d;
+    hero.line.setAttribute("y2", top);
+    hero.ext.setAttribute("y1", top);
+    hero.ext.setAttribute("y2", top);
+    hero.tickTop.setAttribute("transform", `translate(0 ${-d})`);
+    hero.label.setAttribute("y", (top + H.floor) / 2);
+    const mm = Math.round(H.minMM + (d / H.lift) * (H.maxMM - H.minMM));
+    hero.vals.forEach((el) => (el.textContent = mm));
+  }
+  setLift(0);
+
   const motionFrames = $$("[data-frame]");
   const motionReadouts = $$("[data-readout]");
   const motionSteps = $$("[data-step]");
@@ -14,7 +36,6 @@
   // Without GSAP or with reduced motion, show a calm, fully-rendered page.
   if (!hasGsap || reduced) {
     $("[data-lux]").textContent = fmtIN(160000);
-    $$(".stage__beam, .stage__glow").forEach((el) => (el.style.opacity = 1));
     motionSteps[0] && motionSteps[0].classList.add("is-active");
     const firstBed = $("[data-bed]");
     firstBed && firstBed.classList.add("is-active");
@@ -25,35 +46,51 @@
   const DESKTOP = "(min-width: 861px)";
   const MOBILE = "(max-width: 860px)";
 
-  /* 01 · Hero — intro on load, then the OT light "switches on" as you scroll */
-  gsap.timeline({ defaults: { ease: "power4.out" } })
-    .from(".hero .display .line > span", { yPercent: 115, duration: 1.3, stagger: 0.09 })
-    .from("[data-hero-in]", { y: 24, opacity: 0, duration: 1, stagger: 0.08 }, 0.35)
-    .from(".stage__disc", { scale: 0.86, opacity: 0, duration: 1.6 }, 0.05)
-    .from(".stage__lamp", { yPercent: -28, rotate: -10, opacity: 0, duration: 1.6 }, 0.2)
-    .from(".stage__table", { y: 70, opacity: 0, duration: 1.5 }, 0.3)
-    .from(".stage__chips li", { scale: 0.6, opacity: 0, duration: 0.9, stagger: 0.12, ease: "back.out(2)" }, 1.0);
+  /* 01 · Hero — the sheet draws itself on load; scrolling raises the table */
+  gsap.set(".reveal-rect", { attr: { width: 0 } });
+  gsap.set(".d-floor, .d-line, .d-ext, .co__lead", { strokeDashoffset: 1 });
+  gsap.set(".d-tick, .d-label, .co__dot, .co__text", { opacity: 0 });
+  const len = { v: 0 };
+  const lenEl = $("[data-len]");
+  gsap.timeline({ defaults: { ease: "power3.out" } })
+    .from(".hero__h1 .line > span", { yPercent: 115, duration: 1.2, stagger: 0.1, ease: "power4.out" }, 0)
+    .from("[data-hero-in]", { y: 20, opacity: 0, duration: 0.9, stagger: 0.08 }, 0.3)
+    .from(".hero__grid", { opacity: 0, scale: 1.04, duration: 1.6 }, 0)
+    .to(".d-floor", { strokeDashoffset: 0, duration: 0.9, ease: "power2.inOut" }, 0.35)
+    .set(".scan", { opacity: 0.85 }, 0.5)
+    .to(".reveal-rect", { attr: { width: 1160 }, duration: 1.3, ease: "power2.inOut" }, 0.5)
+    .fromTo(".scan", { attr: { x1: -290, x2: -290 } }, { attr: { x1: 870, x2: 870 }, duration: 1.3, ease: "power2.inOut" }, 0.5)
+    .to(".scan", { opacity: 0, duration: 0.3 }, 1.7)
+    .to(".d-ext", { strokeDashoffset: 0, duration: 0.6, stagger: 0.08 }, 1.4)
+    .to(".d-line", { strokeDashoffset: 0, duration: 0.8, ease: "power2.inOut", stagger: 0.1 }, 1.5)
+    .to(".d-tick", { opacity: 1, duration: 0.3, stagger: 0.05 }, 1.9)
+    .to(".d-label", { opacity: 1, duration: 0.5 }, 2.0)
+    .to(len, { v: 2070, duration: 1, ease: "power2.out", onUpdate: () => (lenEl.textContent = Math.round(len.v)) }, 2.0)
+    .to(".co__dot", { opacity: 1, duration: 0.3, stagger: 0.15 }, 2.1)
+    .to(".co__lead", { strokeDashoffset: 0, duration: 0.6, stagger: 0.15 }, 2.15)
+    .to(".co__text", { opacity: 1, duration: 0.5, stagger: 0.15 }, 2.4)
+    .from(".hero__hint", { opacity: 0, y: 8, duration: 0.6 }, 2.8);
 
   mm.add(DESKTOP, () => {
-    const tl = gsap.timeline({
-      scrollTrigger: { trigger: "#hero", start: "top top", end: "+=110%", scrub: 0.6, pin: true, anticipatePin: 1 },
-    });
-    tl.to(".stage__beam", { opacity: 1, duration: 1, ease: "power1.in" }, 0)
-      .to(".stage__glow", { opacity: 1, duration: 1 }, 0.2)
-      .fromTo(".stage__disc", { filter: "brightness(1) saturate(1)" }, { filter: "brightness(1.05) saturate(0.92)", duration: 1 }, 0)
-      .fromTo(".stage__lamp", { rotate: -5 }, { rotate: 1, duration: 1.2, ease: "power1.inOut" }, 0)
-      .to(".stage__table", { scale: 1.06, y: -12, duration: 1.4 }, 0)
-      .to(".stage__chips li:nth-child(1)", { y: -60, duration: 1.4 }, 0)
-      .to(".stage__chips li:nth-child(2)", { y: -110, duration: 1.4 }, 0)
-      .to(".stage__chips li:nth-child(3)", { y: -30, duration: 1.4 }, 0)
-      .to(".hero__copy", { y: -50, opacity: 0.18, duration: 1, ease: "power1.in" }, 0.5)
-      .to(".hero__scroll", { opacity: 0, duration: 0.3 }, 0);
+    const st = { d: 0 };
+    gsap.timeline({ scrollTrigger: { trigger: "#hero", start: "top top", end: "+=100%", scrub: 0.6, pin: true, anticipatePin: 1 } })
+      .to(st, { d: H.lift, duration: 1, ease: "power1.inOut", onUpdate: () => setLift(st.d) }, 0)
+      .to(".co", { opacity: 0, duration: 0.2 }, 0)
+      .to(".hero__head", { y: -24, opacity: 0.55, duration: 1, ease: "power1.in" }, 0)
+      .to(".hero__hint", { opacity: 0, duration: 0.15 }, 0);
+    return () => setLift(0);
   });
   mm.add(MOBILE, () => {
-    gsap.timeline({ scrollTrigger: { trigger: ".hero__stage", start: "top 70%", end: "bottom 30%", scrub: 0.5 } })
-      .to(".stage__beam", { opacity: 1 }, 0)
-      .to(".stage__glow", { opacity: 1 }, 0)
-      .fromTo(".stage__lamp", { rotate: -5 }, { rotate: 1 }, 0);
+    // Side labels are hidden on phones, so crop the sheet to the table and its dimensions.
+    const svg = $(".drawing");
+    const full = svg.getAttribute("viewBox");
+    svg.setAttribute("viewBox", "-20 -60 790 500");
+    const st = { d: 0 };
+    gsap.to(st, {
+      d: H.lift, ease: "none", onUpdate: () => setLift(st.d),
+      scrollTrigger: { trigger: ".hero__stage", start: "top 70%", end: "bottom 20%", scrub: 0.5 },
+    });
+    return () => { setLift(0); svg.setAttribute("viewBox", full); };
   });
 
   /* Section headings rise in */

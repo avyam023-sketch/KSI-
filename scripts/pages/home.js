@@ -1,6 +1,53 @@
 /* Homepage — a scroll-driven story. Each <section> pairs with a block in assets/js/home.js. */
 const { esc, icon, dims } = require("../lib/layout");
 
+/* Hero: KSI-201 drawn as an engineering sheet. Coordinates are in the photo's own
+   pixel space (651 × 373) so dimension lines stay locked to the table at any size.
+   The photo is split at the column (y = 275) so scroll can raise the top half. */
+const HERO = { top: 104, floor: 366, cut: 275, left: 7, right: 642 };
+function heroDrawing() {
+  const src = "assets/img/brand/ksi-201-cutout.webp";
+  const img = (clip) => `<image href="${src}" width="651" height="373" clip-path="url(#${clip})"/>`;
+  const { top, floor, cut, left, right } = HERO;
+  const tick = (x, y) => `<line class="d-tick" x1="${x - 6}" y1="${y + 6}" x2="${x + 6}" y2="${y - 6}"/>`;
+  const callout = (cls, px, py, pts, tx, ty, anchor, text) =>
+    `<g class="co ${cls}"><polyline class="co__lead" points="${px},${py} ${pts}" pathLength="1"/><circle class="co__dot" cx="${px}" cy="${py}" r="4.5"/><text class="co__text" x="${tx}" y="${ty}" text-anchor="${anchor}">${text}</text></g>`;
+  return `
+    <svg class="drawing" viewBox="-290 -100 1160 545" preserveAspectRatio="xMidYMid meet" role="img" aria-label="KSI-201 electro-hydraulic operation table drawn with its 2070 mm length and 690 to 1120 mm height range">
+      <defs>
+        <clipPath id="clip-upper"><rect x="0" y="0" width="651" height="262"/><rect x="278" y="262" width="102" height="${cut - 262}"/></clipPath>
+        <clipPath id="clip-lower"><rect x="0" y="${cut}" width="651" height="${373 - cut}"/><rect x="0" y="262" width="278" height="${cut - 262}"/><rect x="380" y="262" width="271" height="${cut - 262}"/></clipPath>
+        <clipPath id="clip-strip"><rect x="278" y="${cut - 1}" width="102" height="1"/></clipPath>
+        <clipPath id="clip-reveal"><rect class="reveal-rect" x="-290" y="-100" width="1160" height="545"/></clipPath>
+      </defs>
+      <line class="d-floor" x1="-10" y1="${floor}" x2="780" y2="${floor}" pathLength="1"/>
+      <g clip-path="url(#clip-reveal)">
+        <g class="t-lower">${img("clip-lower")}</g>
+        <g class="t-strip">${img("clip-strip")}</g>
+        <g class="t-upper">
+          ${img("clip-upper")}
+          ${callout("co--remote", 159, 172, "-40,172", -50, 176, "end", "Hand remote")}
+          ${callout("co--column", 326, 214, "-40,214", -50, 218, "end", "Electro-hydraulic lift")}
+          ${callout("co--top", 590, 112, "626,-52 690,-52", 698, -48, "start", "C-arm compatible")}
+        </g>
+      </g>
+      <line class="scan" x1="0" y1="-100" x2="0" y2="445"/>
+      <g class="dim dim--len">
+        <line class="d-ext" x1="${left}" y1="150" x2="${left}" y2="414" pathLength="1"/>
+        <line class="d-ext" x1="${right}" y1="166" x2="${right}" y2="414" pathLength="1"/>
+        <line class="d-line" x1="${left}" y1="405" x2="${right}" y2="405" pathLength="1"/>
+        ${tick(left, 405)}${tick(right, 405)}
+        <text class="d-label" x="${(left + right) / 2}" y="433" text-anchor="middle"><tspan class="d-num" data-len>2070</tspan> mm</text>
+      </g>
+      <g class="dim dim--h">
+        <line class="d-ext d-ext--top" x1="650" y1="${top}" x2="748" y2="${top}" pathLength="1"/>
+        <line class="d-line d-h" x1="740" y1="${floor}" x2="740" y2="${top}" pathLength="1"/>
+        ${tick(740, floor)}<g class="d-tick-top">${tick(740, top)}</g>
+        <text class="d-label d-label--h" x="756" y="${(top + floor) / 2}"><tspan class="d-cap" x="756" dy="-14">HEIGHT</tspan><tspan class="d-num" x="756" dy="26" data-h-svg>690</tspan><tspan> mm</tspan></text>
+      </g>
+    </svg>`;
+}
+
 module.exports = function home(data) {
   const { company: c, categories, products, testimonials, certifications } = data;
   const count = (id) => products.filter((p) => p.cat === id).length;
@@ -64,35 +111,34 @@ module.exports = function home(data) {
   const body = `
 <!-- 01 · HERO ───────────────────────────────────────────── -->
 <section class="hero" id="hero" aria-labelledby="hero-title">
-  <div class="hero__inner wrap">
-    <div class="hero__copy">
-      <p class="eyebrow" data-hero-in>Medical equipment manufacturer · Panchkula, India</p>
-      <h1 id="hero-title" class="display">
-        <span class="line"><span>Built for</span></span>
-        <span class="line"><span>professionals.</span></span>
-        <span class="line"><span><em>Designed for</em></span></span>
-        <span class="line"><span><em>better healthcare.</em></span></span>
+  <div class="wrap hero__head">
+    <div class="hero__title">
+      <p class="eyebrow" data-hero-in>KSI Plus · Panchkula, India</p>
+      <h1 id="hero-title" class="display hero__h1">
+        <span class="line"><span>Engineered for the</span></span>
+        <span class="line"><span><em>operating theatre.</em></span></span>
       </h1>
-      <p class="hero__lede" data-hero-in>Operation theatre tables, surgical lights, hospital beds and sterilization systems — engineered and manufactured in India, on a legacy that began in ${c.since}.</p>
+    </div>
+    <div class="hero__aside">
+      <p class="hero__lede" data-hero-in>OT tables, surgical lights, hospital beds and sterilizers, designed and built by KSI Plus on a family legacy that began in ${c.since}.</p>
       <div class="btn-row" data-hero-in>
         <a class="btn btn--primary" href="products.html">Explore the catalogue ${icon.arrow}</a>
         <a class="btn btn--ghost" href="contact.html">Request a quote</a>
       </div>
     </div>
-    <div class="hero__stage" aria-hidden="true">
-      <div class="stage__disc"></div>
-      <div class="stage__beam"></div>
-      <img class="stage__lamp" src="${img("ksi-103")}" alt="">
-      <div class="stage__glow"></div>
-      <img class="stage__table" src="${img("ksi-201")}" alt="">
-      <ul class="stage__chips">
-        <li><span>Electro-hydraulic</span></li>
-        <li><span>C-arm compatible</span></li>
-        <li><span>1,30,000 lux</span></li>
-      </ul>
-    </div>
   </div>
-  <div class="hero__scroll" aria-hidden="true"><span>Scroll</span><i></i></div>
+  <div class="hero__stage wrap">
+    <div class="hero__grid" aria-hidden="true"></div>
+    ${heroDrawing()}
+    <p class="hero__hint" aria-hidden="true">Scroll to raise the table <span>↓</span></p>
+    <dl class="titleblock" data-hero-in>
+      <div><dt>Model</dt><dd class="code">KSI-201/ORT/EH</dd></div>
+      <div><dt>Drive</dt><dd>Electro-hydraulic</dd></div>
+      <div class="tb-dim"><dt>Height</dt><dd><b data-h-val>690</b> mm <span class="muted">/ 690–1120</span></dd></div>
+      <div class="tb-dim"><dt>Length</dt><dd>2070 mm</dd></div>
+      <a class="titleblock__link" href="products/ksi-201.html">Full specification ${icon.arrow}</a>
+    </dl>
+  </div>
 </section>
 
 <!-- 02 · LEGACY ─────────────────────────────────────────── -->
