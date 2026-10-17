@@ -219,7 +219,7 @@
     {
       id: "ksi-207", code: "KSI-207/ORT/SS", cat: "ot-tables",
       name: "Hydraulic / Mechanical Operation Room Table", tier: "SS Top",
-      desc: "A conventional hydraulic and mechanical table with a stainless-steel top — efficient, economical and dependable.",
+      desc: "A conventional hydraulic and mechanical table with a stainless-steel top.",
       specs: [
         ["Table length", "1960 mm"], ["Table width", "530 mm"], ["Table height", "750–1000 mm"], ["Back up / down", "85° / 40°"],
         ["Trendelenburg / reverse", "25° / 20°"], ["Lateral tilt L / R", "20° / 20°"], ["Head up / down", "60° / 90° (manual)"],
@@ -295,7 +295,7 @@
     {
       id: "ksi-101", code: "KSI-101-ORL/M30", cat: "ot-lights",
       name: "Mobile LED Operation Light", tier: "300 mm Dome · Advance",
-      desc: "A mobile shadow-less LED light that can be positioned anywhere in the OT — bright, cool and easy to manoeuvre.",
+      desc: "A mobile shadow-less LED light on a wheeled stand that can be moved anywhere in the OT.",
       specs: [
         ["Type", "Mobile"], ["Light head diameter", "30 cm"], ["Luminance", "60,000 lux"], ["LED count", "21"], ["Colour temperature", "4300 K"],
         ["Colour rendering index (Ra)", "95"], ["Light field", "12–25 cm"], ["Illumination depth", "140 cm"], ["Max. power consumption", "10.5 W"],
@@ -392,7 +392,7 @@
     {
       id: "ksi-109", code: "KSI-109-ORL/T7070", cat: "ot-lights",
       name: "Ceiling LED Operation Light — Twin", tier: "700 + 700 mm · Advance",
-      desc: "Two 700 mm domes at 1,60,000 lux each — maximum illumination for large, multi-team procedures.",
+      desc: "Two 700 mm domes giving 1,60,000 lux each, for large procedures.",
       specs: [
         ["Luminance", "1,60,000 + 1,60,000 lux"], ["Light head diameter", "70 + 70 cm"], ["LED count", "108 + 108"], ["Colour temperature", "4300 ± 200 K"],
         ["Colour rendering index (Ra)", "95"], ["Red colour index (R9)", "94"], ["Light field diameter", "12–35 cm"], ["Illumination depth", ">145 cm"],
@@ -404,7 +404,7 @@
     {
       id: "ksi-110", code: "KSI-110-ORL/T5070C", cat: "ot-lights",
       name: "Ceiling LED Operation Light — Twin with Monitor Arm", tier: "500 + 700 mm · Advance",
-      desc: "A twin-dome system with a third arm for a monitor or camera — lighting and visualisation from one ceiling mount.",
+      desc: "A twin-dome ceiling light with a third arm for a monitor or camera.",
       specs: [
         ["Luminance", "1,30,000 + 1,60,000 lux"], ["Light head diameter", "50 + 70 cm"], ["LED count", "54 + 108"], ["Colour temperature", "4300 ± 200 K"],
         ["Colour rendering index (Ra)", "95"], ["Red colour index (R9)", "94"], ["Light field diameter", "12–35 cm"], ["Illumination depth", ">145 cm"],
@@ -482,7 +482,7 @@
     {
       id: "ksi-117", code: "KSI-117-ORL/M3", cat: "ot-lights",
       name: "Mobile LED Operation Light", tier: "3 Multi-Dome",
-      desc: "A mobile multi-dome light with exceptional depth of focus — easy to position for minor OTs, casualty and procedure rooms.",
+      desc: "A mobile three-dome LED light with adjustable intensity and focus, easy to move between rooms.",
       specs: [
         ["Dome body", "Aluminium die cast"], ["LED count", "36 (12 per dome)"], ["Intensity", "1,00,000 lux ±10 %"], ["Max. power consumption", "80 W"],
         ["Light field", "12–20 cm"], ["Colour temperature", "3800–5000 K"], ["Colour rendering index", "93 Ra"], ["LED life", ">50,000 hours"],
@@ -518,7 +518,7 @@
       id: "ksi-301", code: "KSI-301E-HBP", cat: "hospital-beds",
       name: "4/5 Function Electric ICU Bed", tier: "Premium",
       badge: "Flagship",
-      desc: "A fully electric ICU bed with five positions — head, leg, Trendelenburg, reverse and lateral tilt — and ABS occidental safety railings.",
+      desc: "A fully electric ICU bed with five positions (head, leg, Trendelenburg, reverse and lateral tilt) and ABS occidental safety railings.",
       more: ["Lifting linkages use solid high-grade bar rather than hollow pipe, for precise adjustment, extra strength and longer actuator life."],
       specs: BED_RANGE_5.concat([["Materials", "Premium CRC mild steel, MS perforated top (removable ABS top available)"]]),
       lists: [
@@ -552,7 +552,7 @@
     {
       id: "ksi-304", code: "KSI-304M-HBP", cat: "hospital-beds",
       name: "4/5 Function Mechanical ICU Bed", tier: "Premium",
-      desc: "Five precise mechanical functions on robust screw controls — full ICU positioning with no dependence on power.",
+      desc: "A five-function ICU bed worked by manual screw controls, for areas where power is limited.",
       specs: BED_RANGE_5.concat([["Operation", "Manual screw mechanism, five adjustments"], ["Materials", "Reinforced CRC mild steel"]]),
       lists: [
         ["Features", ["M.S. perforated top", "ABS plastic head / foot bows", "ABS occidental railing", "One S.S. telescopic saline rod", "125 mm castors", "Central locking castors on demand"]],
@@ -563,7 +563,7 @@
     {
       id: "ksi-305", code: "KSI-305M-HBD", cat: "hospital-beds",
       name: "4/5 Function Mechanical ICU Bed", tier: "Deluxe",
-      desc: "Heavy-duty mild-steel ICU bed with a sturdy frame that supports high loads — for hospitals, nursing homes and home care.",
+      desc: "A heavy-duty mild-steel ICU bed that supports high loads, for hospitals, nursing homes and home care.",
       specs: BED_RANGE_5.concat([["Operation", "Advanced screw mechanism"], ["Materials", "Heavy-duty CRC mild steel"]]),
       lists: [
         ["Features", ["M.S. perforated top", "ABS plastic head / foot bows", "Collapsible S.S. railing", "One S.S. telescopic saline rod", "125 mm castors", "Central locking castors on demand"]],
@@ -593,7 +593,7 @@
     {
       id: "ksi-308", code: "KSI-308EM-HBD", cat: "hospital-beds",
       name: "2 Function Electric cum Mechanical Bed", tier: "Deluxe",
-      desc: "Remote-operated electric back section with mechanical leg adjustment — electric convenience at a practical price point.",
+      desc: "An electric back section on a remote, with mechanical leg adjustment.",
       specs: BED_RANGE_2.concat([["Operation", "Back — electric (remote); leg — mechanical"], ["Materials", "Quality CRC mild steel"]]),
       lists: [["Features", ["M.S. perforated top", "ABS plastic head / foot bows", "Collapsible S.S. railing", "One S.S. telescopic saline rod", "125 mm castors"]]],
       tags: ["Hybrid", "Ward"],
@@ -625,7 +625,7 @@
     {
       id: "ksi-312", code: "KSI-312EM-HBP", cat: "hospital-beds",
       name: "3 Function ICU Bed — Electric cum Mechanical", tier: "Premium",
-      desc: "Electric control of back and foot sections with a manual mechanism for Trendelenburg and reverse — strength with flexibility.",
+      desc: "Electric control of the back and foot sections, with a manual mechanism for Trendelenburg and reverse.",
       specs: BED_RANGE_5.concat([["Operation", "Electric primary functions; manual Trendelenburg / reverse"], ["Materials", "CRC mild steel, ABS bows, collapsible SS railings"]]),
       lists: [["Features", ["M.S. perforated top", "125 mm castors (central locking on demand)"]]],
       tags: ["Hybrid", "ICU"],
@@ -633,7 +633,7 @@
     {
       id: "ksi-313", code: "KSI-313M-HBD", cat: "hospital-beds",
       name: "3 Function ICU Mechanical Bed", tier: "Deluxe",
-      desc: "Robust manual control of head/back, leg and Trendelenburg/reverse with a precision ratchet system.",
+      desc: "Manual control of head/back, leg and Trendelenburg/reverse on a precision ratchet system.",
       specs: BED_RANGE_5.concat([["Operation", "Fully manual, three functions"], ["Materials", "Deluxe CRC mild steel, precision ratchet system"]]),
       lists: [["Features", ["M.S. perforated top", "ABS plastic head / foot bows", "Collapsible S.S. railing", "One S.S. saline rod", "125 mm castors"]]],
       tags: ["Mechanical", "ICU"],
@@ -649,7 +649,7 @@
     {
       id: "ksi-315", code: "KSI-315M-HBD", cat: "hospital-beds",
       name: "1 Function Mechanical Bed", tier: "Deluxe",
-      desc: "A single backrest adjustment on a refined screw mechanism — ideal for routine diagnostics.",
+      desc: "A single backrest adjustment on a screw mechanism, for routine diagnostics.",
       specs: [["Back section", "0–80°"], ["Operation", "Premium screw mechanism"], ["Materials", "Deluxe CRC mild steel"]],
       lists: [["Features", ["M.S. perforated top", "ABS plastic head / foot bows", "One S.S. saline rod", "100 mm castors on demand"]]],
       tags: ["Mechanical", "Ward"],
@@ -657,7 +657,7 @@
     {
       id: "ksi-316", code: "KSI-316M-HBR", cat: "hospital-beds",
       name: "1 Function Mechanical Bed", tier: "Regular",
-      desc: "A conventional backrest bed with SS laminated bows — a trusted platform for diagnostic and recovery use.",
+      desc: "A conventional backrest bed with SS laminated head and foot bows, for diagnostic and recovery use.",
       specs: [["Back section", "0–80°"], ["Operation", "Standard screw mechanism"], ["Materials", "CRC mild steel, laminated head / foot bows"]],
       lists: [["Features", ["M.S. perforated top", "S.S. laminated head / foot bows", "Collapsible railings", "100 mm castors on demand"]]],
       tags: ["Mechanical", "Ward"],
@@ -665,7 +665,7 @@
     {
       id: "ksi-317", code: "KSI-317M-HBC", cat: "hospital-beds",
       name: "2 Function Full Fowler Bed — Mechanical", tier: "Conventional Series",
-      desc: "A full Fowler bed with manual adjustment, collapsible railings and ABS bows — for extended care and rehabilitation.",
+      desc: "A full Fowler bed with manual adjustment, collapsible railings and ABS bows, for extended care and rehabilitation.",
       specs: BED_RANGE_2.concat([["Configuration", "Full Fowler"], ["Materials", "Conventional CRC mild steel, ABS head / foot bows"]]),
       lists: [["Features", ["M.S. perforated top", "100 mm castors available", "Collapsible SS railings"]]],
       tags: ["Mechanical", "Ward"],
@@ -673,7 +673,7 @@
     {
       id: "ksi-318", code: "KSI-318M-HBC", cat: "hospital-beds",
       name: "1 Function Semi Fowler Bed — Mechanical", tier: "Conventional Series",
-      desc: "A single manual back-section adjustment in mild steel with ABS bows — consistent and reliable.",
+      desc: "A single manual back-section adjustment, in mild steel with ABS bows.",
       specs: [["Back section", "0–80°"], ["Operation", "Manual backrest"], ["Materials", "CRC mild steel"]],
       lists: [["Features", ["M.S. perforated top", "Collapsible S.S. railing on demand", "100 mm castors on demand"]]],
       tags: ["Mechanical", "Ward"],
@@ -689,7 +689,7 @@
     {
       id: "ksi-320", code: "KSI-320AB-HB", cat: "hospital-beds",
       name: "Attendant Bed",
-      desc: "A robust, static platform designed specifically for patient attendants and caregivers.",
+      desc: "A fixed, non-adjustable bed for patient attendants and caregivers.",
       specs: [["Operation", "Static, non-adjustable"], ["Materials", "Robust CRC mild steel for heavy use"]],
       lists: [["Features", ["Custom designed for attendant use", "SS laminated head and foot bows"]]],
       tags: ["Ward"],
@@ -706,7 +706,7 @@
     {
       id: "ksi-401", code: "KSI-401-BLP", cat: "furniture",
       name: "Bedside Locker", tier: "ABS Premium",
-      desc: "A high-grade ABS bedside locker — secure, hygienic and easy to clean.",
+      desc: "A high-grade ABS bedside locker that is easy to clean.",
       lists: [["Features", ["ABS plastic locker", "Heavy duty", "Drawer and cupboards", "Mobile on castors"]]],
     },
     {
@@ -768,7 +768,7 @@
     {
       id: "ksi-410", code: "KSI-410D-PT", cat: "furniture",
       name: "Patient Carrying Trolley", tier: "Deluxe",
-      desc: "A refined patient trolley focused on ease of use, safety and smooth transfers.",
+      desc: "A patient carrying trolley with a removable stretcher, mattress and fixed two-hook IV rod.",
       lists: [["Features", ["Mild steel tubular frame", "150 mm heavy-duty castors", "Removable stretcher", "Built-in handles and mattress", "Two-hook IV rod (fixed)"]]],
     },
     {
@@ -798,7 +798,7 @@
     {
       id: "ksi-415", code: "KSI-415P-MT", cat: "furniture",
       name: "Mayo's Instrument Trolley", tier: "All SS Premium",
-      desc: "An all-stainless over-bed instrument trolley — hygienic and easy to clean.",
+      desc: "An all-stainless over-bed instrument trolley that is easy to clean.",
       lists: [["Features", ["Complete S.S. framework", "Removable S.S. tray", "Over-bed type", "Mobile on castors"]]],
     },
     {
@@ -822,7 +822,7 @@
     {
       id: "ksi-419", code: "KSI-419R-IT", cat: "furniture",
       name: "Instrument Trolley", tier: "EPC with SS Shelves · Regular",
-      desc: "An EPC frame with two stainless-steel shelves — easy to clean, dependable everyday performance.",
+      desc: "An EPC frame with two stainless-steel shelves, for everyday use.",
       lists: [["Features", ["M.S. framework, EPC", "Two fixed S.S. shelves", "S.S. railing on three sides", "Mobile on castors"]]],
     },
     {
@@ -852,14 +852,14 @@
     {
       id: "ksi-423", code: "KSI-423P-IV", cat: "stands-seating",
       name: "Saline Stand, 4 Hooks", tier: "All SS Premium",
-      desc: "A four-hook all-stainless IV stand for simultaneous infusions — durable and easy to sterilise.",
+      desc: "An all-stainless IV stand with four hooks for simultaneous infusions.",
       specs: [["Base", "515 × 515 mm"], ["Height (down / up)", "1420 / 2330 mm"]],
       lists: [["Features", ["Complete S.S.", "Heavy tubular base", "Mobile on castors", "Manual height adjustment, four IV hooks"]]],
     },
     {
       id: "ksi-424", code: "KSI-424D-IV", cat: "stands-seating",
       name: "Saline Stand, 2 Hooks", tier: "All SS Deluxe",
-      desc: "A robust two-hook stainless stand that balances stability and ease of access.",
+      desc: "An all-stainless IV stand with two hooks.",
       specs: [["Base", "515 × 515 mm"], ["Height (down / up)", "1420 / 2330 mm"]],
       lists: [["Features", ["Complete S.S.", "Heavy tubular base", "Mobile on castors", "Manual height adjustment, two IV hooks"]]],
     },
@@ -893,7 +893,7 @@
     {
       id: "ksi-429", code: "KSI-429DS-FS", cat: "stands-seating",
       name: "Footstep, Double", tier: "All SS Premium",
-      desc: "A fully stainless double footstep — durable, anti-corrosive and stable.",
+      desc: "A double footstep made entirely of stainless steel.",
       lists: [["Features", ["Complete S.S.", "S.S. pipe with rubber mat", "Rubber shoes"]]],
     },
     {
@@ -950,7 +950,7 @@
     {
       id: "ksi-438", code: "KSI-438-SL", cat: "ward-accessories",
       name: "Soiled Linen Hamper",
-      desc: "A robust, hygienic linen hamper that is easy to clean in high-traffic areas.",
+      desc: "A linen hamper with a removable canvas bag, easy to clean.",
       lists: [["Features", ["All M.S. epoxy powder coated frame", "Removable canvas bag", "Mobile on castors", "Complete S.S. on demand"]]],
     },
     {
@@ -1007,13 +1007,13 @@
     {
       id: "ksi-503", code: "KSI-503", cat: "sterilizers",
       name: "Single Drum Autoclave, Wing Nut Type", tier: "All Stainless Steel",
-      desc: "A seamless stainless-steel wing-nut autoclave built for demanding surgical settings.",
+      desc: "A seamless stainless-steel wing-nut autoclave.",
       specs: [["Sizes", "14\" × 12\" (25 L) · 12\" × 12\" (20 L)"], ["Electric load", "1.5 kW"], ["Other sizes", "9×9, 9×12, 12×18, 14×21"]],
     },
     {
       id: "ksi-503a", code: "KSI-503A", cat: "sterilizers",
       name: "Single Drum Autoclave, Wing Nut Type", tier: "Aluminium",
-      desc: "A lightweight seamless aluminium wing-nut autoclave for flexible operation.",
+      desc: "A lightweight seamless aluminium wing-nut autoclave.",
       specs: [["Sizes", "14\" × 12\" (25 L) · 12\" × 12\" (20 L)"], ["Other sizes", "9×9, 9×12, 12×18, 14×21"]],
     },
     {
@@ -1026,7 +1026,7 @@
     {
       id: "ksi-505", code: "KSI-505", cat: "sterilizers",
       name: "UV Chamber", tier: "12 Tray",
-      desc: "A UV sterilisation cabinet for instruments, documents, phones and keys — destroys bacteria in 3–5 minutes.",
+      desc: "A UV cabinet for sterilising instruments, documents, phones and keys. The UV light destroys bacteria within 3 to 5 minutes.",
       specs: [["Outer body", "12\" × 7.4\" × 20.6\""], ["Inner body", "12\" × 6.2\" × 20.6\""], ["Inner with side tray", "8.8\" × 6.2\" × 17.6\""], ["Packing box (single)", "14.4\" × 11\" × 23.4\""]],
       lists: [["Features", ["Twelve trays drawn from 0.5 mm S.S. coil", "Original Philips UV tube with S.S. reflector", "5 mm toughened glass", "CNC-made compact cabinet", "EPE foam protection, 7-ply box"]]],
     },
@@ -1097,7 +1097,7 @@
     {
       id: "ksi-603", code: "KSI-603-PU", cat: "infant-care",
       name: "LED Phototherapy Unit",
-      desc: "Non-invasive blue-LED phototherapy for neonatal jaundice — fanless, silent and height-adjustable.",
+      desc: "Blue-LED phototherapy for neonatal jaundice. Fanless, silent and height-adjustable.",
       specs: [
         ["Illumination source", "12 blue LEDs"], ["Observation lights", "3 white LEDs"], ["LED intensity", "~60 µW/cm²/nm"], ["Peak wavelength", "450–465 nm"],
         ["Tilting head", "0–180°"], ["Therapy timer", "Yes"], ["LED lifetime", "50,000 hours"], ["Treatment distance", "35–40 cm"],
@@ -1120,7 +1120,7 @@
     {
       id: "ksi-604", code: "KSI-604-RW", cat: "infant-care",
       name: "Infant Radiant Warmer",
-      desc: "An open-care warmer for newborns at risk of heat loss — for NICUs, labour rooms and nurseries.",
+      desc: "An open-care warmer for newborns at risk of heat loss, for NICUs, labour rooms and nurseries.",
       more: ["Consists of a cart, bassinet, heater module with examination light, and a pillar module housing the controller and SMPS. A removable instrument tray mounts at the rear."],
       specs: [["Modes", "Servo (skin probe), manual (10–100 % heater power), air"]],
       lists: [["Features", ["Heater module controller", "Examination light", "Apgar timer", "Alarms: set point high / low, probe failure"]]],
@@ -1128,7 +1128,7 @@
   ];
 
   const testimonials = [
-    { name: "Dr. Manjit Sekhon", org: "Cosmo Hospital, Mohali", quote: "Based on our association and experience of more than two decades, if I have to sum up in one word the quality of KSI products, sales and after-sales support — it is “Perfection”." },
+    { name: "Dr. Manjit Sekhon", org: "Cosmo Hospital, Mohali", quote: "Based on our association and experience of more than two decades, if I have to sum up in one word the quality of KSI products, sales and after-sales support, it is ‘Perfection’." },
     { name: "Dr. Raj Bahadur", org: "Director Principal, GMCH Chandigarh", quote: "KSI is making a remarkable contribution to health and hospital technology. Keep it up." },
     { name: "Dr. Dhawan", org: "", quote: "I’ve been using KSI products since almost 2006. Their quality meets the global standard and their after-sales service is excellent." },
     { name: "Ojas Hospital", org: "", quote: "We have been using KSI products for the last 15–20 years and have found them very sturdy and of high quality — they are still going." },

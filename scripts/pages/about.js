@@ -8,7 +8,7 @@ module.exports = function about(data) {
     ["1973", "ARKO is founded", "Late Shri R.K. Khullar establishes ARKO, the foundation of the family's medical manufacturing legacy."],
     ["Then", "KSI Medicare", "Deepak Kumar Khullar, after years mastering OT tables and surgical lights at ARKO, builds KSI Medicare into a trusted supplier for hospitals from Punjab to Assam."],
     ["Today", "KSI Plus", `A new generation of equipment: ${products.length} products across ${categories.length} categories, CE and ISO 13485 certified, manufactured at our own works in Derabassi.`],
-    ["Soon", "Surgical robotics", "Homegrown robotic arms for next-generation surgery, now in development."],
+    ["Next", "Surgical robotics", "Robotic arms for surgery, currently in development."],
   ];
 
   const leaders = [
@@ -21,10 +21,10 @@ module.exports = function about(data) {
 <section class="page-hero page-hero--about">
   <div class="wrap page-hero__split">
     <div>
-      <p class="eyebrow">About KSI Plus</p>
-      <h1 class="display display--md">A legacy <em>since ${c.since}.</em></h1>
+      <p class="eyebrow">Since ${c.since}</p>
+      <h1 class="display display--md">About KSI Plus</h1>
     </div>
-    <p class="page-hero__lede">KSI Plus is the latest chapter of a family of Indian medical manufacturers that has equipped operating theatres for more than five decades. We design, build and support the equipment ourselves, from our office in Panchkula and our works in Derabassi.</p>
+    <p class="page-hero__lede">KSI Plus is run by the Khullar family, who have made operation theatre equipment since ARKO was founded in 1973. The office is in Panchkula and the equipment is built at the company’s works in Derabassi.</p>
   </div>
 </section>
 
@@ -39,8 +39,7 @@ module.exports = function about(data) {
 <section class="section section--tint" aria-labelledby="lead-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Leadership</p>
-      <h2 id="lead-title" class="h2">Legacy, innovation <em>and market expertise.</em></h2>
+      <h2 id="lead-title" class="h2">Leadership</h2>
     </div>
     <div class="leaders">
       ${leaders.map(([i, n, r, d]) => `<article class="leader" data-reveal><span class="leader__mono" aria-hidden="true">${i}</span><h3>${n}</h3><p class="leader__role">${r}</p><p class="muted">${d}</p></article>`).join("")}
@@ -52,8 +51,7 @@ module.exports = function about(data) {
   <div class="wrap">
     <div class="section-head section-head--split">
       <div>
-        <p class="eyebrow">Quality & compliance</p>
-        <h2 id="q-title" class="h2">Built for reliability. <em>Certified for it.</em></h2>
+        <h2 id="q-title" class="h2">Certifications</h2>
       </div>
       <p class="muted">Our quality management system is certified for medical devices, and our products carry CE certificates of compliance. Copies of certificates are available on request.</p>
     </div>
@@ -66,8 +64,7 @@ module.exports = function about(data) {
 <section class="section section--tint" id="voices" aria-labelledby="v-title">
   <div class="wrap">
     <div class="section-head">
-      <p class="eyebrow">Testimonials</p>
-      <h2 id="v-title" class="h2">What hospitals <em>say about us.</em></h2>
+      <h2 id="v-title" class="h2">Testimonials</h2>
     </div>
     <div class="quotes-grid">
       ${testimonials.map((t) => `<figure class="quote quote--card" data-reveal><blockquote>“${esc(t.quote)}”</blockquote><figcaption><strong>${esc(t.name)}</strong>${t.org ? `<span>${esc(t.org)}</span>` : ""}</figcaption></figure>`).join("")}

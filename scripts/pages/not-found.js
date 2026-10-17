@@ -11,7 +11,7 @@ module.exports = function notFound() {
 <section class="page-hero page-hero--404">
   <div class="wrap">
     <p class="eyebrow">404</p>
-    <h1 class="display display--md">This page has <em>moved or never existed.</em></h1>
+    <h1 class="display display--md">Page not found</h1>
     <p class="page-hero__lede">The product you are looking for may be listed under a new model code.</p>
     <div class="btn-row"><a class="btn btn--primary" href="/products.html">Browse the catalogue ${icon.arrow}</a><a class="btn btn--ghost" href="/">Go to home</a></div>
   </div>

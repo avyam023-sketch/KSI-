@@ -10,10 +10,9 @@ module.exports = function contact(data) {
 <section class="page-hero page-hero--contact">
   <div class="wrap page-hero__split">
     <div>
-      <p class="eyebrow">Contact</p>
-      <h1 class="display display--md">Let's equip <em>your next theatre.</em></h1>
+      <h1 class="display display--md">Contact</h1>
     </div>
-    <p class="page-hero__lede">Tell us what you are planning — a new OT, an ICU upgrade or a full ward. Our team will help you specify the right equipment and send a detailed quotation.</p>
+    <p class="page-hero__lede">Call, WhatsApp or email us, or answer the questions below and we will send you a quotation. Tell us if it is a new OT, an ICU upgrade or a full ward.</p>
   </div>
 </section>
 
@@ -35,7 +34,7 @@ module.exports = function contact(data) {
           { name: "name", q: "First, what's your name?", required: true, autocomplete: "name", placeholder: "Dr. A. Sharma", error: "We need a name to address the quotation to." },
           { name: "org", q: "Which hospital or organisation is this for?", autocomplete: "organization", placeholder: "City Hospital, Panchkula" },
           { name: "category", q: "What are you looking for?", type: "choice", options: categories.map((x) => x.short).concat(["Complete OT / ICU setup", "Something else"]) },
-          { name: "message", q: "Tell us about the requirement.", hint: "Quantities, models, timeline — or tap a quick answer.", type: "textarea", placeholder: "e.g. 2 OT tables and twin ceiling lights for a new theatre", quick: ["New OT setup", "ICU upgrade", "Replacing old equipment", "Need it within a month"] },
+          { name: "message", q: "Tell us about the requirement.", hint: "Quantities, models and timeline, or tap a quick answer.", type: "textarea", placeholder: "e.g. 2 OT tables and twin ceiling lights for a new theatre", quick: ["New OT setup", "ICU upgrade", "Replacing old equipment", "Need it within a month"] },
           { name: "phone", q: "What's the best number to reach you on?", hint: "Mobile or landline, with STD code.", type: "tel", required: true, autocomplete: "tel", placeholder: "+91 98xxx xxxxx", error: "Add a number so our team can reach you." },
           { name: "email", q: "And an email for the written quotation?", type: "email", autocomplete: "email", placeholder: "you@hospital.com" },
           { name: "city", q: "Last one: which city is the site in?", autocomplete: "address-level2", placeholder: "Panchkula" },

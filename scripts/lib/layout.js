@@ -48,7 +48,6 @@ function productCard(p, data, depth, opts = {}) {
       ${p.tier ? `<p class="card__tier">${esc(p.tier)}</p>` : ""}
     </div>
     ${opts.noAdd ? "" : `<button class="card__add" type="button" data-enquire="${p.id}" aria-label="Add ${esc(p.name)} to enquiry list">${icon.plus}${icon.check}</button>`}
-    ${p.badge ? `<span class="card__badge">${esc(p.badge)}</span>` : ""}
   </article>`;
 }
 
@@ -107,8 +106,7 @@ function footer(data, depth) {
 <footer class="site-footer">
   <div class="wrap">
     <div class="site-footer__cta">
-      <p class="eyebrow eyebrow--light">Planning an OT, ICU or ward?</p>
-      <h2 class="site-footer__title">Tell us what you are equipping. <em>We will specify it with you.</em></h2>
+      <h2 class="site-footer__title">Planning an OT, ICU or ward? Send us your requirement.</h2>
       <div class="btn-row">
         <a class="btn btn--light" href="${r}contact.html">Request a quote ${icon.arrow}</a>
         <a class="btn btn--outline-light" href="https://wa.me/${c.whatsapp}" target="_blank" rel="noopener">${icon.whatsapp} WhatsApp us</a>
@@ -146,7 +144,7 @@ function footer(data, depth) {
     </div>
     <div class="site-footer__base">
       <span>© ${year} ${esc(c.legal)} · KSI Plus. All rights reserved.</span>
-      <span>Proudly made in India</span>
+      <span>Made in India</span>
     </div>
   </div>
 </footer>`;
@@ -226,7 +224,7 @@ ${canonical !== null ? `<link rel="canonical" href="${c.siteUrl}/${canonical}">`
 <link rel="icon" href="${r}favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="${r}assets/css/site.css">
 ${jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : ""}
 </head>

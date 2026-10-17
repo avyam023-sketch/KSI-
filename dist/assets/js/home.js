@@ -99,19 +99,10 @@
     gsap.from(h, { y: 40, opacity: 0, duration: 1.1, ease: "power3.out", scrollTrigger: { trigger: h, start: "top 85%", once: true } });
   });
 
-  /* 02 · Legacy — words brighten with scroll; numbers count up */
-  gsap.to(".legacy__statement .w", {
-    opacity: 1, ease: "none", stagger: 0.1,
-    scrollTrigger: { trigger: ".legacy__statement", start: "top 78%", end: "bottom 40%", scrub: true },
-  });
-  $$("[data-count]").forEach((el) => {
-    const to = Number(el.dataset.count), from = Number(el.dataset.from || 0), o = { v: from };
-    el.textContent = from;
-    gsap.to(o, {
-      v: to, duration: to > 1000 ? 1.8 : 1.4, ease: "power3.out",
-      scrollTrigger: { trigger: el, start: "top 90%", once: true },
-      onUpdate: () => (el.textContent = Math.round(o.v)),
-    });
+  /* 02 · Legacy — statement and figures rise in once */
+  gsap.from(".legacy__statement, .stat", {
+    y: 30, opacity: 0, duration: 1, stagger: 0.08, ease: "power3.out",
+    scrollTrigger: { trigger: ".legacy", start: "top 75%", once: true },
   });
 
   /* 03 · Range — vertical scroll drives a horizontal track */
@@ -264,28 +255,11 @@
   });
   gsap.from(".quality__list li", { y: 20, opacity: 0, duration: 0.8, stagger: 0.07, ease: "power3.out", scrollTrigger: { trigger: ".quality__list", start: "top 88%", once: true } });
 
-  /* 08 · Voices — two marquees whose speed follows scroll velocity */
-  (function marquee() {
-    const loops = $$("[data-marquee]").map((m) => {
-      const dir = Number(m.dataset.marquee);
-      const track = $(".marquee__track", m);
-      return gsap.fromTo(track, { xPercent: dir > 0 ? 0 : -50 }, { xPercent: dir > 0 ? -50 : 0, duration: 70, ease: "none", repeat: -1 });
-    });
-    const boost = { v: 1 };
-    ScrollTrigger.create({
-      trigger: "#voices", start: "top bottom", end: "bottom top",
-      onToggle: (self) => loops.forEach((l) => (self.isActive ? l.play() : l.pause())),
-      onUpdate: (self) => {
-        const v = 1 + Math.min(6, Math.abs(self.getVelocity()) / 350);
-        gsap.to(boost, { v, duration: 0.2, overwrite: true, onUpdate: () => loops.forEach((l) => l.timeScale(boost.v)) });
-        gsap.to(boost, { v: 1, duration: 1.2, delay: 0.25, ease: "power2.out", onUpdate: () => loops.forEach((l) => l.timeScale(boost.v)) });
-      },
-    });
-  })();
+  /* 08 · Voices */
+  gsap.from(".voices .quote", { y: 30, opacity: 0, duration: 0.9, stagger: 0.06, ease: "power3.out", scrollTrigger: { trigger: ".voices__grid", start: "top 85%", once: true } });
 
-  /* 09 · Next — slow float */
-  gsap.to(".next__media", { y: -14, duration: 3, ease: "sine.inOut", yoyo: true, repeat: -1 });
-  gsap.from(".next__media", { scale: 0.8, opacity: 0, duration: 1.2, ease: "power3.out", scrollTrigger: { trigger: "#next", start: "top 75%", once: true } });
+  /* 09 · Next */
+  gsap.from(".next__inner > *", { y: 30, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: "#next", start: "top 75%", once: true } });
 
   /* 10 · Offices */
   gsap.from(".visit .office", { y: 40, opacity: 0, duration: 1, stagger: 0.1, ease: "power3.out", scrollTrigger: { trigger: ".visit__grid", start: "top 85%", once: true } });

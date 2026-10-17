@@ -409,7 +409,7 @@
       } else {
         window.open(`https://wa.me/${KSI.company.whatsapp}?text=${encodeURIComponent(text)}`, "_blank", "noopener");
       }
-      toast("Opening your message — just press send.");
+      toast("Your message is ready. Press send to finish.");
     });
   }
   bindForm($("[data-enq-form]"));

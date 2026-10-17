@@ -29,9 +29,9 @@ module.exports = function catalogue(data) {
   const body = `
 <section class="page-hero page-hero--catalogue">
   <div class="wrap">
-    <p class="eyebrow">Product catalogue · ${products.length} models</p>
-    <h1 class="display display--md">The complete <em>KSI Plus range.</em></h1>
-    <p class="page-hero__lede">From electro-hydraulic OT tables to stainless-steel hollowware. Add products to your enquiry list as you browse, then send them to us in one message.</p>
+    <p class="eyebrow">${products.length} models · ${categories.length} categories</p>
+    <h1 class="display display--md">Product catalogue</h1>
+    <p class="page-hero__lede">Search by name or model code, or jump to a category. Tap + on any product to add it to an enquiry list, then send the list to us in one message.</p>
   </div>
 </section>
 <div class="catbar" data-catbar>
@@ -48,7 +48,7 @@ module.exports = function catalogue(data) {
   ${sections}
   <div class="no-results" data-no-results hidden>
     <h2 class="h3">No products match “<span data-q></span>”.</h2>
-    <p class="muted">Try a model code, or ask us directly — we also build to specification.</p>
+    <p class="muted">Try a model code, or ask our team.</p>
     <a class="btn btn--primary" href="contact.html">Ask our team ${icon.arrow}</a>
   </div>
 </div>`;

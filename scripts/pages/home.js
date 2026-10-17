@@ -53,8 +53,6 @@ module.exports = function home(data) {
   const count = (id) => products.filter((p) => p.cat === id).length;
   const img = (id) => `assets/img/products/${id}.webp`;
 
-  const words = (s) =>
-    s.split(" ").map((w) => `<span class="w">${w}</span>`).join(" ");
 
   const rangePanels = categories
     .map(
@@ -106,7 +104,6 @@ module.exports = function home(data) {
     list
       .map((t) => `<figure class="quote"><blockquote>“${esc(t.quote)}”</blockquote><figcaption><strong>${esc(t.name)}</strong>${t.org ? `<span>${esc(t.org)}</span>` : ""}</figcaption></figure>`)
       .join("");
-  const half = Math.ceil(testimonials.length / 2);
 
   const body = `
 <!-- 01 · HERO ───────────────────────────────────────────── -->
@@ -116,7 +113,7 @@ module.exports = function home(data) {
       <p class="eyebrow" data-hero-in>KSI Plus · Panchkula, India</p>
       <h1 id="hero-title" class="display hero__h1">
         <span class="line"><span>Engineered for the</span></span>
-        <span class="line"><span><em>operating theatre.</em></span></span>
+        <span class="line"><span>operating theatre.</span></span>
       </h1>
     </div>
     <div class="hero__aside">
@@ -144,13 +141,12 @@ module.exports = function home(data) {
 <!-- 02 · LEGACY ─────────────────────────────────────────── -->
 <section class="legacy" id="legacy" aria-label="Our legacy">
   <div class="wrap">
-    <p class="eyebrow">Since ${c.since}</p>
-    <p class="legacy__statement" data-words>${words("Three generations of the Khullar family have built the equipment Indian surgeons rely on — from ARKO in 1973, to KSI Medicare, to KSI Plus today.")}</p>
+    <p class="legacy__statement">The Khullar family has made operation theatre equipment since 1973: first as ARKO, then KSI Medicare, and now KSI Plus.</p>
     <dl class="stats">
-      <div class="stat"><dt>Legacy began</dt><dd><span data-count="${c.since}" data-from="1900">${c.since}</span></dd></div>
-      <div class="stat"><dt>Generations of engineering</dt><dd><span data-count="3">3</span></dd></div>
-      <div class="stat"><dt>Products in the range</dt><dd><span data-count="${products.length}">${products.length}</span></dd></div>
-      <div class="stat"><dt>Certified</dt><dd class="stat__text">CE · ISO 13485</dd></div>
+      <div class="stat"><dt>Making OT equipment since</dt><dd>${c.since}</dd></div>
+      <div class="stat"><dt>Generations of the family</dt><dd>3</dd></div>
+      <div class="stat"><dt>Products in the catalogue</dt><dd>${products.length}</dd></div>
+      <div class="stat"><dt>Certification</dt><dd class="stat__text">CE · ISO 13485</dd></div>
     </dl>
   </div>
 </section>
@@ -160,8 +156,7 @@ module.exports = function home(data) {
   <div class="range__pin">
     <div class="range__head wrap">
       <div>
-        <p class="eyebrow">The complete range</p>
-        <h2 id="range-title" class="h2">Nine categories. <em>One manufacturer.</em></h2>
+        <h2 id="range-title" class="h2">${products.length} products in ${categories.length} categories</h2>
       </div>
       <div class="range__progress" aria-hidden="true"><span class="range__count"><b data-range-index>01</b> / ${String(categories.length).padStart(2, "0")}</span><i><span data-range-bar></span></i></div>
     </div>
@@ -176,8 +171,8 @@ module.exports = function home(data) {
   <div class="motion__pin wrap">
     <div class="motion__copy">
       <p class="eyebrow">KSI-201/ORT/EH · URAP series</p>
-      <h2 id="motion-title" class="h2">One table. <em>Every position.</em></h2>
-      <p class="muted motion__lede">Our electro-hydraulic table moves through each surgical position smoothly and precisely, with C-arm compatibility built in.</p>
+      <h2 id="motion-title" class="h2">How the KSI-201 moves</h2>
+      <p class="muted motion__lede">The electro-hydraulic table’s main positions, with the travel for each from the catalogue. Scroll to step through them.</p>
       <ol class="motion__steps">
         ${steps.map((s, i) => `<li data-step="${i}"><span class="motion__idx">${String(i + 1).padStart(2, "0")}</span><span class="motion__label">${s.label}</span></li>`).join("")}
       </ol>
@@ -200,10 +195,9 @@ module.exports = function home(data) {
   <div class="wrap">
     <div class="light__top">
       <div class="light__copy">
-        <p class="eyebrow eyebrow--light">Operation theatre lights</p>
-        <h2 id="light-title" class="h2">Shadow-less light, <em>true to tissue.</em></h2>
+        <h2 id="light-title" class="h2">Operation theatre lights</h2>
         <div class="light__lux"><span class="light__num" data-lux>0</span><span class="light__unit">lux<br>per 700 mm dome</span></div>
-        <p class="light__lede">Prismatic reflectors, each housing three LEDs, deliver deep, even illumination with colour rendering that lets surgeons read tissue accurately — with minimal heat for a cool, comfortable theatre.</p>
+        <p class="light__lede">Advance-series domes use prismatic reflectors with three LEDs in each. The 700 mm dome gives 1,60,000 lux with a colour rendering index of 95, and dims from 10 to 100% in nine steps.</p>
       </div>
       <div class="light__lamp" aria-hidden="true">
         <div class="lamp__halo"></div>
@@ -223,9 +217,8 @@ module.exports = function home(data) {
 <section class="beds" id="beds" aria-labelledby="beds-title">
   <div class="beds__pin wrap">
     <div class="beds__copy">
-      <p class="eyebrow">Hospital & ICU beds</p>
-      <h2 id="beds-title" class="h2">Five functions. <em>One touch.</em></h2>
-      <p class="muted">Our 4/5-function ICU beds lift on solid high-grade bar rather than hollow pipe, for precise adjustment and longer actuator life. Electric, mechanical and hybrid versions.</p>
+      <h2 id="beds-title" class="h2">ICU bed positions</h2>
+      <p class="muted">The 4/5-function ICU beds come in electric, mechanical and hybrid versions. Their lifting linkages use solid high-grade bar instead of hollow pipe.</p>
       <ul class="beds__list">
         ${bedSteps.map(([k, l, v]) => `<li data-bed="${k}"><span>${l}</span><b>${v}</b></li>`).join("")}
       </ul>
@@ -268,8 +261,7 @@ module.exports = function home(data) {
 <section class="quality" id="quality" aria-labelledby="quality-title">
   <div class="wrap quality__grid">
     <div class="quality__copy">
-      <p class="eyebrow">Quality & compliance</p>
-      <h2 id="quality-title" class="h2">Certified to <em>international standards.</em></h2>
+      <h2 id="quality-title" class="h2">Certifications</h2>
       <p class="muted">Our OT tables, lights and hospital furniture are built at our works in Derabassi, Punjab, under a quality management system certified for medical devices.</p>
       <ul class="quality__list">
         <li><b>CE</b><span>Certificate of compliance</span></li>
@@ -287,11 +279,10 @@ module.exports = function home(data) {
 <!-- 08 · VOICES ────────────────────────────────────────── -->
 <section class="voices" id="voices" aria-labelledby="voices-title">
   <div class="wrap voices__head">
-    <p class="eyebrow">In their words</p>
-    <h2 id="voices-title" class="h2">Trusted by surgeons <em>for decades.</em></h2>
+    <h2 id="voices-title" class="h2">What hospitals say</h2>
   </div>
-  <div class="marquee" data-marquee="1"><div class="marquee__track">${quotes(testimonials.slice(0, half))}${quotes(testimonials.slice(0, half))}</div></div>
-  <div class="marquee" data-marquee="-1"><div class="marquee__track">${quotes(testimonials.slice(half))}${quotes(testimonials.slice(half))}</div></div>
+  <div class="wrap voices__grid">${quotes(testimonials.slice(0, 6))}</div>
+  <div class="wrap voices__more"><a class="link-arrow" href="about.html#voices">Read all ${testimonials.length} testimonials ${icon.arrow}</a></div>
 </section>
 
 <!-- 09 · NEXT ─────────────────────────────────────────── -->
@@ -300,8 +291,8 @@ module.exports = function home(data) {
     <div class="next__media" aria-hidden="true"><img src="assets/img/brand/robot.webp" alt=""></div>
     <div>
       <p class="eyebrow eyebrow--light">Coming soon</p>
-      <h2 id="next-title" class="h2">Homegrown robotic arms <em>for next-generation surgery.</em></h2>
-      <p class="next__lede">India-made surgical robotics, developed on the same engineering foundation as our OT tables and lights.</p>
+      <h2 id="next-title" class="h2">Surgical robotics, made in India</h2>
+      <p class="next__lede">KSI Plus is developing robotic arms for surgery. Register your interest and we will contact you when they are available.</p>
       <a class="btn btn--outline-light" href="contact.html">Register your interest ${icon.arrow}</a>
     </div>
   </div>
@@ -311,8 +302,7 @@ module.exports = function home(data) {
 <section class="visit" id="visit" aria-labelledby="visit-title">
   <div class="wrap">
     <div class="visit__head">
-      <p class="eyebrow">Panchkula · Derabassi · Brampton</p>
-      <h2 id="visit-title" class="h2">Meet the team <em>behind the equipment.</em></h2>
+      <h2 id="visit-title" class="h2">Offices and works</h2>
     </div>
     <div class="visit__grid">
       ${c.offices
