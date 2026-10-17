@@ -238,15 +238,109 @@
     if (f.city) lines.push(`City: ${f.city}`);
     return { text: lines.join("\n"), name: f.name };
   }
+  /* Flash-card deck: one question per card. Without JS the steps render as a normal form. */
+  const LABELS = { name: "Name", org: "Organisation", phone: "Phone", email: "Email", city: "City", category: "Looking for", message: "Notes" };
+  function initDeck(form) {
+    const deck = $("[data-deck]", form);
+    if (!deck) return null;
+    const steps = $$(".step", deck);
+    const dots = $$(".deck__dots i", deck);
+    const review = $("[data-review]", deck);
+    let at = 0;
+    deck.classList.add("is-live");
+
+    const fieldOf = (step) => $("input:not([type=radio]), textarea", step);
+    const valueOf = (step) => {
+      const radio = $("input[type=radio]:checked", step);
+      if (radio) return radio.value;
+      const f = fieldOf(step);
+      return f ? f.value.trim() : "";
+    };
+    const valid = (step) => !step.hasAttribute("data-required") || valueOf(step) !== "";
+
+    function fillReview() {
+      review.innerHTML = steps.slice(0, -1).map((st, i) => {
+        const input = $("input, textarea", st);
+        const v = valueOf(st);
+        return `<div><dt>${LABELS[input.name] || input.name}</dt><dd>${v ? v.replace(/[<>&]/g, "") : '<span class="muted">—</span>'}</dd><button type="button" class="review__edit" data-goto="${i}">Edit</button></div>`;
+      }).join("");
+    }
+
+    function show(i, dir = 1) {
+      const from = steps[at];
+      at = Math.max(0, Math.min(steps.length - 1, i));
+      const to = steps[at];
+      if (to.classList.contains("step--review")) fillReview();
+      const box = $(".deck__cards", deck);
+      const h0 = box.offsetHeight;
+      steps.forEach((st) => { st.classList.toggle("is-current", st === to); st.inert = st !== to; });
+      dots.forEach((d, k) => { d.classList.toggle("is-done", k < at); d.classList.toggle("is-on", k === at); });
+      // The deck resizes to the current card, smoothly when motion is allowed.
+      if (hasGsap && !reduced && from !== to) gsap.fromTo(box, { height: h0 }, { height: box.offsetHeight, duration: 0.5, ease: "power3.inOut", clearProps: "height" });
+      if (hasGsap && !reduced && from !== to) {
+        gsap.fromTo(from, { opacity: 1, y: 0, rotation: 0 }, { opacity: 0, y: -40 * dir, rotation: -2 * dir, duration: 0.35, ease: "power2.in" });
+        gsap.fromTo(to, { opacity: 0, y: 60 * dir, rotation: 2 * dir, scale: 0.96 }, { opacity: 1, y: 0, rotation: 0, scale: 1, duration: 0.6, delay: 0.15, ease: "power3.out" });
+      }
+      const f = fieldOf(to) || $("input, button[type=submit]", to);
+      if (f && deck.offsetParent) setTimeout(() => f.focus({ preventScroll: true }), hasGsap && !reduced ? 300 : 0);
+    }
+
+    function next() {
+      const st = steps[at];
+      const err = $(".step__error", st);
+      if (!valid(st)) {
+        if (err) err.hidden = false;
+        if (hasGsap && !reduced) gsap.fromTo(st, { x: -10 }, { x: 0, duration: 0.5, ease: "elastic.out(1, 0.3)" });
+        (fieldOf(st) || st).focus();
+        return;
+      }
+      if (err) err.hidden = true;
+      show(at + 1, 1);
+    }
+
+    deck.addEventListener("click", (e) => {
+      if (e.target.closest("[data-next]")) next();
+      else if (e.target.closest("[data-skip]")) show(at + 1, 1);
+      else if (e.target.closest("[data-back]")) show(at - 1, -1);
+      else if (e.target.closest("[data-goto]")) show(Number(e.target.closest("[data-goto]").dataset.goto), -1);
+      const q = e.target.closest("[data-quick]");
+      if (q) {
+        const ta = $("textarea", steps[at]);
+        const t = q.dataset.quick;
+        const has = ta.value.split(/;\s*/).includes(t);
+        const parts = ta.value.split(/;\s*/).filter(Boolean);
+        ta.value = (has ? parts.filter((x) => x !== t) : parts.concat(t)).join("; ");
+        q.classList.toggle("is-on", !has);
+      }
+    });
+    // Picking a choice moves on by itself.
+    deck.addEventListener("change", (e) => { if (e.target.type === "radio") setTimeout(next, 260); });
+    deck.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" || e.target.closest("button")) return;
+      const isTA = e.target.tagName === "TEXTAREA";
+      if (isTA && !(e.ctrlKey || e.metaKey)) return;
+      e.preventDefault();
+      if (!steps[at].classList.contains("step--review")) next();
+    });
+    show(0);
+    return { show, stepOf: (name) => steps.findIndex((st) => $(`[name="${name}"]`, st)) };
+  }
+
   function bindForm(form) {
     if (!form) return;
     const err = $("[data-form-error]", form);
+    const deck = initDeck(form);
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const name = form.elements.name, phone = form.elements.phone;
       const bad = [name, phone].filter((el) => !el.value.trim());
       [name, phone].forEach((el) => el.classList.toggle("is-invalid", bad.includes(el)));
-      if (bad.length) { err.hidden = false; bad[0].focus(); return; }
+      if (bad.length) {
+        err.hidden = false;
+        if (deck) deck.show(deck.stepOf(bad[0].name), -1);
+        else bad[0].focus();
+        return;
+      }
       err.hidden = true;
       const via = (e.submitter && e.submitter.value) || "whatsapp";
       const { text, name: who } = compose(form);

@@ -1,5 +1,6 @@
 /* Contact — quick channels, enquiry form (sent via WhatsApp or email), offices and map. */
 const { esc, icon } = require("../lib/layout");
+const { stepsForm } = require("../lib/steps");
 
 module.exports = function contact(data) {
   const { company: c, categories } = data;
@@ -27,27 +28,19 @@ module.exports = function contact(data) {
 
     <form class="contact__form" data-contact-form novalidate>
       <h2 class="h3">Request a quotation</h2>
-      <div class="field-row">
-        <div class="field"><label for="c-name">Your name</label><input id="c-name" name="name" autocomplete="name" required></div>
-        <div class="field"><label for="c-org">Hospital / organisation</label><input id="c-org" name="org" autocomplete="organization"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label for="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autocomplete="tel" required></div>
-        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" autocomplete="email"></div>
-      </div>
-      <div class="field-row">
-        <div class="field"><label for="c-city">City</label><input id="c-city" name="city" autocomplete="address-level2"></div>
-        <div class="field"><label for="c-cat">Interested in</label>
-          <select id="c-cat" name="category"><option value="">Select a category</option>${categories.map((x) => `<option>${esc(x.name)}</option>`).join("")}<option>Complete OT / ICU setup</option><option>Other</option></select>
-        </div>
-      </div>
-      <div class="field"><label for="c-msg">Requirement</label><textarea id="c-msg" name="message" rows="5" placeholder="Quantities, models, timeline, site details…"></textarea></div>
-      <p class="form-note muted" data-contact-items hidden></p>
-      <p class="form-error" data-form-error hidden>Please add your name and phone number.</p>
-      <div class="btn-row">
-        <button class="btn btn--primary" type="submit" value="whatsapp">${icon.whatsapp} Send on WhatsApp</button>
-        <button class="btn btn--ghost" type="submit" value="email">${icon.mail} Send by email</button>
-      </div>
+      ${stepsForm({
+        attr: "c",
+        sendNote: true,
+        steps: [
+          { name: "name", q: "First, what's your name?", required: true, autocomplete: "name", placeholder: "Dr. A. Sharma", error: "We need a name to address the quotation to." },
+          { name: "org", q: "Which hospital or organisation is this for?", autocomplete: "organization", placeholder: "City Hospital, Panchkula" },
+          { name: "category", q: "What are you looking for?", type: "choice", options: categories.map((x) => x.short).concat(["Complete OT / ICU setup", "Something else"]) },
+          { name: "message", q: "Tell us about the requirement.", hint: "Quantities, models, timeline — or tap a quick answer.", type: "textarea", placeholder: "e.g. 2 OT tables and twin ceiling lights for a new theatre", quick: ["New OT setup", "ICU upgrade", "Replacing old equipment", "Need it within a month"] },
+          { name: "phone", q: "What's the best number to reach you on?", hint: "Mobile or landline, with STD code.", type: "tel", required: true, autocomplete: "tel", placeholder: "+91 98xxx xxxxx", error: "Add a number so our team can reach you." },
+          { name: "email", q: "And an email for the written quotation?", type: "email", autocomplete: "email", placeholder: "you@hospital.com" },
+          { name: "city", q: "Last one: which city is the site in?", autocomplete: "address-level2", placeholder: "Panchkula" },
+        ],
+      })}
     </form>
   </div>
 </section>

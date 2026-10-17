@@ -152,6 +152,15 @@ function footer(data, depth) {
 </footer>`;
 }
 
+/* Questions asked one at a time in the enquiry drawer. */
+const ENQ_STEPS = [
+  { name: "name", q: "First, what's your name?", required: true, autocomplete: "name", placeholder: "Dr. A. Sharma", error: "We need a name to address the quotation to." },
+  { name: "org", q: "Which hospital or organisation is this for?", autocomplete: "organization", placeholder: "City Hospital, Panchkula" },
+  { name: "phone", q: "What's the best number to reach you on?", hint: "Mobile or landline, with STD code.", type: "tel", required: true, autocomplete: "tel", placeholder: "+91 98xxx xxxxx", error: "Add a number so our team can reach you." },
+  { name: "city", q: "Which city is the site in?", autocomplete: "address-level2", placeholder: "Panchkula" },
+  { name: "message", q: "Anything we should know?", hint: "Tap any that apply, or write your own.", type: "textarea", placeholder: "Project, timeline, specifications…", quick: ["New OT setup", "Replacing old equipment", "Need it within a month", "Site visit requested"] },
+];
+
 function drawer(data, depth) {
   const r = rel(depth);
   return `
@@ -172,18 +181,7 @@ function drawer(data, depth) {
       <a class="btn btn--ghost btn--sm" href="${r}products.html">Browse the catalogue ${icon.arrow}</a>
     </div>
     <form class="enq-form" data-enq-form novalidate>
-      <div class="field"><label for="enq-name">Your name</label><input id="enq-name" name="name" autocomplete="name" required></div>
-      <div class="field"><label for="enq-org">Hospital / organisation</label><input id="enq-org" name="org" autocomplete="organization"></div>
-      <div class="field-row">
-        <div class="field"><label for="enq-phone">Phone</label><input id="enq-phone" name="phone" type="tel" autocomplete="tel" required></div>
-        <div class="field"><label for="enq-city">City</label><input id="enq-city" name="city" autocomplete="address-level2"></div>
-      </div>
-      <div class="field"><label for="enq-msg">Notes <span class="muted">(optional)</span></label><textarea id="enq-msg" name="message" rows="3" placeholder="Project, timeline, specifications…"></textarea></div>
-      <p class="form-error" data-form-error hidden>Please add your name and phone number.</p>
-      <div class="drawer__actions">
-        <button class="btn btn--primary" type="submit" value="whatsapp">${icon.whatsapp} Send on WhatsApp</button>
-        <button class="btn btn--ghost" type="submit" value="email">${icon.mail} Send by email</button>
-      </div>
+      ${require("./steps").stepsForm({ attr: "enq", steps: ENQ_STEPS })}
     </form>
   </div>
 </aside>

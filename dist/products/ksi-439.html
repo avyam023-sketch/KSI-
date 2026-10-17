@@ -184,18 +184,105 @@
       <a class="btn btn--ghost btn--sm" href="../products.html">Browse the catalogue <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
     <form class="enq-form" data-enq-form novalidate>
-      <div class="field"><label for="enq-name">Your name</label><input id="enq-name" name="name" autocomplete="name" required></div>
-      <div class="field"><label for="enq-org">Hospital / organisation</label><input id="enq-org" name="org" autocomplete="organization"></div>
-      <div class="field-row">
-        <div class="field"><label for="enq-phone">Phone</label><input id="enq-phone" name="phone" type="tel" autocomplete="tel" required></div>
-        <div class="field"><label for="enq-city">City</label><input id="enq-city" name="city" autocomplete="address-level2"></div>
+      
+    <div class="deck" data-deck>
+      <div class="deck__dots" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="deck__cards">
+        
+      <fieldset class="step" data-step="0" data-required>
+        <p class="step__count"><span>01</span> / 06</p>
+        <legend class="step__q" id="enq-name-q"><label for="enq-name">First, what&#39;s your name?</label></legend>
+        
+        <div class="step__field"><input id="enq-name" name="name" required autocomplete="name" placeholder="Dr. A. Sharma" type="text"></div>
+        
+        <p class="step__error" role="alert" hidden>We need a name to address the quotation to.</p>
+        <div class="step__nav">
+          <span></span>
+          <div class="step__go">
+            
+            <button type="button" class="btn btn--primary btn--sm" data-next>Next <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <p class="step__kbd">Press Enter ↵</p>
+      </fieldset>
+      <fieldset class="step" data-step="1">
+        <p class="step__count"><span>02</span> / 06</p>
+        <legend class="step__q" id="enq-org-q"><label for="enq-org">Which hospital or organisation is this for?</label></legend>
+        
+        <div class="step__field"><input id="enq-org" name="org" autocomplete="organization" placeholder="City Hospital, Panchkula" type="text"></div>
+        
+        <p class="step__error" role="alert" hidden>Please answer this one to continue.</p>
+        <div class="step__nav">
+          <button type="button" class="step__back" data-back>Back</button>
+          <div class="step__go">
+            <button type="button" class="step__skip" data-skip>Skip</button>
+            <button type="button" class="btn btn--primary btn--sm" data-next>Next <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <p class="step__kbd">Press Enter ↵</p>
+      </fieldset>
+      <fieldset class="step" data-step="2" data-required>
+        <p class="step__count"><span>03</span> / 06</p>
+        <legend class="step__q" id="enq-phone-q"><label for="enq-phone">What&#39;s the best number to reach you on?</label></legend>
+        <p class="step__hint">Mobile or landline, with STD code.</p>
+        <div class="step__field"><input id="enq-phone" name="phone" required autocomplete="tel" placeholder="+91 98xxx xxxxx" type="tel" inputmode="tel"></div>
+        
+        <p class="step__error" role="alert" hidden>Add a number so our team can reach you.</p>
+        <div class="step__nav">
+          <button type="button" class="step__back" data-back>Back</button>
+          <div class="step__go">
+            
+            <button type="button" class="btn btn--primary btn--sm" data-next>Next <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <p class="step__kbd">Press Enter ↵</p>
+      </fieldset>
+      <fieldset class="step" data-step="3">
+        <p class="step__count"><span>04</span> / 06</p>
+        <legend class="step__q" id="enq-city-q"><label for="enq-city">Which city is the site in?</label></legend>
+        
+        <div class="step__field"><input id="enq-city" name="city" autocomplete="address-level2" placeholder="Panchkula" type="text"></div>
+        
+        <p class="step__error" role="alert" hidden>Please answer this one to continue.</p>
+        <div class="step__nav">
+          <button type="button" class="step__back" data-back>Back</button>
+          <div class="step__go">
+            <button type="button" class="step__skip" data-skip>Skip</button>
+            <button type="button" class="btn btn--primary btn--sm" data-next>Next <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <p class="step__kbd">Press Enter ↵</p>
+      </fieldset>
+      <fieldset class="step" data-step="4">
+        <p class="step__count"><span>05</span> / 06</p>
+        <legend class="step__q" id="enq-message-q"><label for="enq-message">Anything we should know?</label></legend>
+        <p class="step__hint">Tap any that apply, or write your own.</p>
+        <div class="step__field"><textarea id="enq-message" name="message" placeholder="Project, timeline, specifications…" rows="3"></textarea></div>
+        <div class="step__quick" aria-label="Quick answers"><button type="button" class="pick pick--btn" data-quick="New OT setup">New OT setup</button><button type="button" class="pick pick--btn" data-quick="Replacing old equipment">Replacing old equipment</button><button type="button" class="pick pick--btn" data-quick="Need it within a month">Need it within a month</button><button type="button" class="pick pick--btn" data-quick="Site visit requested">Site visit requested</button></div>
+        <p class="step__error" role="alert" hidden>Please answer this one to continue.</p>
+        <div class="step__nav">
+          <button type="button" class="step__back" data-back>Back</button>
+          <div class="step__go">
+            <button type="button" class="step__skip" data-skip>Skip</button>
+            <button type="button" class="btn btn--primary btn--sm" data-next>Review <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+        <p class="step__kbd">Ctrl + Enter ↵</p>
+      </fieldset>
+        <fieldset class="step step--review" data-step="5">
+          <p class="step__count"><span>06</span> / 06</p>
+          <legend class="step__q">All set. Here's what we'll send.</legend>
+          <dl class="review" data-review></dl>
+          
+          <p class="form-error" data-form-error hidden>Please add your name and phone number.</p>
+          <div class="step__send">
+            <button class="btn btn--primary" type="submit" value="whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.4 12.7L3.5 20.5l4.4-1.1A8.5 8.5 0 1 0 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.2 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c-.1.2-.1.4 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5 0l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.6 0 .9-.6 1.7-1.6 1.9-1 .2-2.6-.2-4.3-1.7-1.7-1.5-2.6-3.1-2.6-4.2 0-.6.2-1 .4-1.3z" fill="currentColor"/></svg> Send on WhatsApp</button>
+            <button class="btn btn--ghost" type="submit" value="email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> Send by email</button>
+          </div>
+          <div class="step__nav"><button type="button" class="step__back" data-back>Back</button><span></span></div>
+        </fieldset>
       </div>
-      <div class="field"><label for="enq-msg">Notes <span class="muted">(optional)</span></label><textarea id="enq-msg" name="message" rows="3" placeholder="Project, timeline, specifications…"></textarea></div>
-      <p class="form-error" data-form-error hidden>Please add your name and phone number.</p>
-      <div class="drawer__actions">
-        <button class="btn btn--primary" type="submit" value="whatsapp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5a8.5 8.5 0 0 0-7.4 12.7L3.5 20.5l4.4-1.1A8.5 8.5 0 1 0 12 3.5z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.2 8.6c.2-.4.5-.4.8-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2 0 .5-.1.6l-.5.6c-.1.2-.1.4 0 .5.6 1 1.4 1.8 2.5 2.4.2.1.4.1.5 0l.6-.6c.2-.2.4-.2.6-.1l1.6.7c.3.1.4.3.4.6 0 .9-.6 1.7-1.6 1.9-1 .2-2.6-.2-4.3-1.7-1.7-1.5-2.6-3.1-2.6-4.2 0-.6.2-1 .4-1.3z" fill="currentColor"/></svg> Send on WhatsApp</button>
-        <button class="btn btn--ghost" type="submit" value="email"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M4 7l8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg> Send by email</button>
-      </div>
+    </div>
     </form>
   </div>
 </aside>
