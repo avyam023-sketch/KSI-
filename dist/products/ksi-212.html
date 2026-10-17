@@ -172,11 +172,12 @@
   <div class="drawer__head">
     <div>
       <p class="eyebrow">Request a quote</p>
-      <h2>Your enquiry list</h2>
+      <h2 data-drawer-title>Your enquiry list</h2>
     </div>
     <button class="icon-btn" type="button" data-close-enquiry aria-label="Close enquiry list"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></button>
   </div>
   <div class="drawer__body">
+    <p class="enq-note" data-enq-note hidden>Prices are not listed online. Answer a few questions below and we will send you a quotation for these items.</p>
     <ul class="enq-list" data-enq-list></ul>
     <section class="finder" data-finder aria-label="Add products">
       <button type="button" class="finder__toggle" data-finder-toggle aria-expanded="true"><span>Add products</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -297,6 +298,13 @@
   </div>
 </aside>
 <div class="toast" data-toast role="status" aria-live="polite"></div>
+<button type="button" class="quote-bar" data-open-enquiry data-quote-bar hidden>
+  <span class="quote-bar__label">Get a quote for <b data-quote-count>0 items</b></span>
+  <span class="quote-bar__go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+</button>
+<a class="wa-float" href="https://wa.me/919815453531?text=Hello%20KSI%20Plus%2C%20I%20have%20an%20enquiry." target="_blank" rel="noopener" aria-label="Chat with KSI Plus on WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16.04 3C8.86 3 3.03 8.82 3.03 16c0 2.3.6 4.53 1.74 6.5L3 29l6.68-1.75A12.97 12.97 0 0 0 16.04 29C23.2 29 29 23.18 29 16S23.2 3 16.04 3zm0 23.72c-1.97 0-3.9-.53-5.58-1.53l-.4-.24-3.97 1.04 1.06-3.86-.26-.4A10.67 10.67 0 0 1 5.3 16c0-5.92 4.82-10.73 10.74-10.73 5.91 0 10.7 4.81 10.7 10.73s-4.8 10.72-10.7 10.72zm5.88-8.03c-.32-.16-1.91-.94-2.2-1.05-.3-.11-.51-.16-.73.16-.21.32-.83 1.05-1.02 1.27-.19.21-.37.24-.7.08-.32-.16-1.36-.5-2.58-1.6-.96-.85-1.6-1.9-1.79-2.22-.19-.32-.02-.5.14-.66.15-.14.32-.37.48-.56.16-.19.21-.32.32-.53.1-.21.05-.4-.03-.56-.08-.16-.72-1.74-.99-2.38-.26-.62-.53-.54-.72-.55h-.62c-.21 0-.56.08-.85.4-.3.32-1.12 1.09-1.12 2.66s1.15 3.09 1.31 3.3c.16.21 2.26 3.45 5.47 4.84.77.33 1.36.53 1.83.68.77.24 1.47.21 2.02.13.62-.09 1.91-.78 2.18-1.53.27-.75.27-1.4.19-1.53-.08-.13-.29-.21-.61-.37z"/></svg>
+</a>
 <script src="../assets/vendor/gsap.min.js"></script>
 <script src="../assets/vendor/ScrollTrigger.min.js"></script>
 <script src="../assets/vendor/lenis.min.js"></script>

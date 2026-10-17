@@ -762,6 +762,31 @@ address { font-style: normal; }
 .toast.is-on { transform: translate(-50%, 0); visibility: visible; }
 .toast button { border: 0; background: none; color: #b9c9e2; font-weight: 700; padding: 0; text-decoration: underline; text-underline-offset: 3px; }
 
+/* ---------- "Get a quote" bar (shown once the enquiry list has items) ---------- */
+.quote-bar { position: fixed; left: 50%; bottom: max(18px, env(safe-area-inset-bottom)); z-index: 125; transform: translateX(-50%); display: flex; align-items: center; gap: 14px; height: 52px; padding: 0 8px 0 20px; border: 0; border-radius: 6px; background: var(--ink); color: #fff; font-size: 15px; font-weight: 600; box-shadow: 0 10px 28px -10px rgba(13, 27, 42, 0.55); white-space: nowrap; }
+.quote-bar b { font-weight: 800; }
+.quote-bar__go { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 4px; background: rgba(255, 255, 255, 0.12); }
+.quote-bar__go svg { width: 18px; height: 18px; }
+.quote-bar:hover .quote-bar__go { background: var(--brand); }
+.menu-open .quote-bar, html[style*="overflow: hidden"] .quote-bar { opacity: 0; pointer-events: none; }
+.toast { bottom: 84px; }
+@media (max-width: 620px) {
+  .quote-bar { left: 16px; right: 80px; transform: none; justify-content: space-between; font-size: 14px; }
+  .quote-bar__label { overflow: hidden; text-overflow: ellipsis; }
+}
+.enq-note { margin: 0 0 14px; font-size: 14px; color: var(--muted); }
+.review__products { grid-template-columns: 104px 1fr !important; }
+.review__products ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.review__products li { font-size: 14px; font-weight: 600; }
+.review__products .code { font-size: 11.5px; margin-right: 4px; }
+
+/* ---------- Floating WhatsApp ---------- */
+.wa-float { position: fixed; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); z-index: 130; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; background: #25d366; color: #fff; box-shadow: 0 6px 18px -6px rgba(13, 27, 42, 0.45); transition: transform 0.25s var(--ease), opacity 0.25s; }
+.wa-float svg { width: 28px; height: 28px; }
+.wa-float:hover { transform: scale(1.06); }
+.menu-open .wa-float, html[style*="overflow: hidden"] .wa-float { opacity: 0; pointer-events: none; }
+@media (max-width: 520px) { .wa-float { width: 48px; height: 48px; } .wa-float svg { width: 26px; height: 26px; } }
+
 /* ---------- Footer ---------- */
 .site-footer { background: var(--night); color: #c5cfdd; padding: clamp(80px, 10vw, 140px) 0 32px; }
 .site-footer__cta { padding-bottom: clamp(56px, 7vw, 96px); border-bottom: 1px solid var(--night-line); }

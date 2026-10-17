@@ -109,8 +109,21 @@
     check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   };
 
+  const quoteBar = $("[data-quote-bar]");
+  const drawerTitle = $("[data-drawer-title]");
+  const enqNote = $("[data-enq-note]");
   function syncUI(rerender = true) {
     const n = items.length;
+    const units = items.reduce((t, x) => t + x.qty, 0);
+    const label = `${n} product${n === 1 ? "" : "s"}${units > n ? ` (${units} units)` : ""}`;
+    if (quoteBar) {
+      const wasHidden = quoteBar.hidden;
+      quoteBar.hidden = n === 0;
+      $("[data-quote-count]", quoteBar).textContent = label;
+      if (wasHidden && n > 0 && hasGsap && !reduced) gsap.from(quoteBar, { y: 30, opacity: 0, duration: 0.5, ease: "power3.out" });
+    }
+    if (drawerTitle) drawerTitle.textContent = n ? "Get a quote for the following" : "Your enquiry list";
+    if (enqNote) enqNote.hidden = n === 0;
     countEls.forEach((el) => {
       if (el.textContent !== String(n)) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
       el.textContent = n;
@@ -318,7 +331,10 @@
     const valid = (step) => !step.hasAttribute("data-required") || valueOf(step) !== "";
 
     function fillReview() {
-      review.innerHTML = steps.slice(0, -1).map((st, i) => {
+      const products = items.length
+        ? `<div class="review__products"><dt>Quote for</dt><dd><ul>${items.map(({ id, qty }) => `<li><span class="code">${byId[id].code}</span> ${byId[id].name} × ${qty}</li>`).join("")}</ul></dd></div>`
+        : "";
+      review.innerHTML = products + steps.slice(0, -1).map((st, i) => {
         const input = $("input, textarea", st);
         const v = valueOf(st);
         return `<div><dt>${LABELS[input.name] || input.name}</dt><dd>${v ? v.replace(/[<>&]/g, "") : '<span class="muted">—</span>'}</dd><button type="button" class="review__edit" data-goto="${i}">Edit</button></div>`;
