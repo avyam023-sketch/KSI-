@@ -177,9 +177,23 @@ function drawer(data, depth) {
     <ul class="enq-list" data-enq-list></ul>
     <div class="enq-empty" data-enq-empty>
       <p>No products added yet.</p>
-      <p class="muted">Use <span class="kbd">+</span> on any product to build a list, then send it to our team in one message.</p>
-      <a class="btn btn--ghost btn--sm" href="${r}products.html">Browse the catalogue ${icon.arrow}</a>
+      <p class="muted">Pick a product type or search below, and tap <span class="kbd">+</span> to add it.</p>
     </div>
+    <section class="finder" data-finder aria-label="Add products">
+      <button type="button" class="finder__toggle" data-finder-toggle aria-expanded="true">${icon.plus}<span>Add products</span></button>
+      <div class="finder__panel" data-finder-panel>
+        <label class="search search--sm">
+          ${icon.search}
+          <span class="sr-only">Search products</span>
+          <input type="search" placeholder="Search name or model code" data-finder-q autocomplete="off">
+        </label>
+        <div class="finder__types" role="tablist" aria-label="Product types">
+          ${data.categories.map((c) => `<button type="button" role="tab" class="chip chip--sm" data-finder-cat="${c.id}" aria-selected="false">${esc(c.short)}<span>${data.products.filter((p) => p.cat === c.id).length}</span></button>`).join("")}
+        </div>
+        <ul class="finder__results" data-finder-results aria-live="polite"></ul>
+        <p class="finder__hint muted" data-finder-hint>Choose a product type, or start typing to search all ${data.products.length} products.</p>
+      </div>
+    </section>
     <form class="enq-form" data-enq-form novalidate>
       ${require("./steps").stepsForm({ attr: "enq", steps: ENQ_STEPS })}
     </form>

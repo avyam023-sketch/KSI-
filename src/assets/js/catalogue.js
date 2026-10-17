@@ -67,7 +67,18 @@
     ScrollTrigger.batch(cards, {
       start: "top 92%",
       once: true,
-      onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", stagger: 0.06, overwrite: true }),
+      onEnter: (els) => {
+        // A jump (e.g. tapping a category) "enters" every card on the way: show the ones
+        // already scrolled past at once, and only stagger what is actually on screen.
+        const onScreen = els.filter((el) => el.getBoundingClientRect().top < window.innerHeight);
+        const passed = els.filter((el) => el.getBoundingClientRect().bottom <= 0);
+        if (passed.length) gsap.set(passed, { opacity: 1, y: 0, overwrite: true });
+        const show = onScreen.filter((el) => !passed.includes(el));
+        const rest = show.length ? show : els.filter((el) => !passed.includes(el));
+        if (rest.length) gsap.to(rest, {
+          opacity: 1, y: 0, duration: 0.8, ease: "power3.out", stagger: Math.min(0.06, 0.4 / Math.max(1, show.length)), overwrite: true,
+        });
+      },
     });
     gsap.from(".catbar", { y: -10, opacity: 0, duration: 0.8, delay: 0.3, ease: "power3.out" });
   }

@@ -9,6 +9,7 @@
   const $ = (s, el = document) => el.querySelector(s);
   const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
   const byId = Object.fromEntries(KSI.products.map((p) => [p.id, p]));
+  const imgSrc = (id) => `${root}assets/img/products/${id}.webp`;
 
   /* ---------- Smooth scroll (Lenis) wired into GSAP's ticker ---------- */
   let lenis = null;
@@ -104,6 +105,8 @@
   const emptyEl = $("[data-enq-empty]");
   const icons = {
     close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    plus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>',
   };
 
   function syncUI(rerender = true) {
@@ -128,8 +131,8 @@
         .map(({ id, qty }) => {
           const p = byId[id];
           return `<li class="enq-item" data-id="${id}">
-            <img src="${root}assets/img/products/${id}.webp" alt="">
-            <a class="enq-item__name" href="${root}products/${id}.html"><small>${p.code}</small>${p.name}${p.tier ? ` — ${p.tier}` : ""}</a>
+            <img src="${imgSrc(id)}" alt="">
+            <a class="enq-item__name" href="${root}products/${id}.html"><small>${p.code}</small>${p.name}${p.tier ? ` <em>${p.tier}</em>` : ""}</a>
             <div class="enq-item__ctrl">
               <div class="qty"><button type="button" data-qty="-1" aria-label="Decrease quantity">−</button><input type="number" min="1" value="${qty}" aria-label="Quantity" inputmode="numeric"><button type="button" data-qty="1" aria-label="Increase quantity">+</button></div>
               <button class="enq-remove" type="button" data-remove aria-label="Remove ${p.name}">${icons.close}</button>
@@ -165,8 +168,12 @@
     if (!b) return;
     e.preventDefault();
     const id = b.dataset.enquire;
-    if (has(id)) { remove(id); toast("Removed from enquiry list"); }
-    else { add(id); toast(`${byId[id].code} added to your enquiry list`, true); }
+    if (has(id)) { remove(id); if (!drawer.classList.contains("is-open")) toast("Removed from enquiry list"); }
+    else {
+      add(id);
+      // Inside the open drawer the tick on the button is feedback enough.
+      if (!drawer.classList.contains("is-open")) toast(`${byId[id].code} added to your enquiry list`, true);
+    }
   });
 
   /* ---------- Toast ---------- */
@@ -186,6 +193,7 @@
   let lastFocus = null;
   function openDrawer() {
     lastFocus = document.activeElement;
+    setFinderOpen(items.length === 0);
     scrim.hidden = false;
     requestAnimationFrame(() => { scrim.classList.add("is-open"); drawer.classList.add("is-open"); });
     drawer.setAttribute("aria-hidden", "false");
@@ -238,6 +246,57 @@
     if (f.city) lines.push(`City: ${f.city}`);
     return { text: lines.join("\n"), name: f.name };
   }
+  /* ---------- Product finder inside the drawer: types + search ---------- */
+  const finder = $("[data-finder]");
+  function setFinderOpen(open) {
+    if (!finder) return;
+    $("[data-finder-panel]", finder).hidden = !open;
+    $("[data-finder-toggle]", finder).setAttribute("aria-expanded", String(open));
+    finder.classList.toggle("is-open", open);
+  }
+  if (finder) {
+    const q = $("[data-finder-q]", finder);
+    const results = $("[data-finder-results]", finder);
+    const hint = $("[data-finder-hint]", finder);
+    const types = $$("[data-finder-cat]", finder);
+    const intro = hint.textContent;
+    const catName = Object.fromEntries(KSI.categories.map((c) => [c.id, c.name]));
+    const hay = Object.fromEntries(KSI.products.map((p) => [p.id, [p.code, p.name, p.tier, catName[p.cat], ...(p.tags || [])].join(" ").toLowerCase()]));
+    let cat = null;
+
+    function render() {
+      const words = q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+      if (!cat && !words.length) { results.innerHTML = ""; hint.hidden = false; hint.textContent = intro; return; }
+      const list = KSI.products.filter((p) => (!cat || p.cat === cat) && words.every((w) => hay[p.id].includes(w)));
+      hint.hidden = list.length > 0;
+      if (!list.length) hint.textContent = `No products match “${q.value.trim()}”${cat ? ` in ${catName[cat]}` : ""}.`;
+      results.innerHTML = list
+        .map((p) => `<li class="finder__row">
+          <img src="${imgSrc(p.id)}" alt="" loading="lazy">
+          <span class="finder__name"><small>${p.code}</small>${p.name}${p.tier ? ` <em>${p.tier}</em>` : ""}</span>
+          <button type="button" class="finder__add" data-enquire="${p.id}" aria-label="Add ${p.name}${p.tier ? ` (${p.tier})` : ""}">${icons.plus}${icons.check}</button>
+        </li>`)
+        .join("");
+      syncUI(false);
+      if (hasGsap && !reduced && results.children.length) gsap.from(results.children, { y: 10, opacity: 0, duration: 0.35, stagger: 0.02, ease: "power2.out" });
+    }
+    types.forEach((b) =>
+      b.addEventListener("click", () => {
+        cat = cat === b.dataset.finderCat ? null : b.dataset.finderCat;
+        types.forEach((t) => { const on = t.dataset.finderCat === cat; t.classList.toggle("is-active", on); t.setAttribute("aria-selected", String(on)); });
+        render();
+      })
+    );
+    let tq;
+    q.addEventListener("input", () => { clearTimeout(tq); tq = setTimeout(render, 120); });
+    q.addEventListener("keydown", (e) => { if (e.key === "Enter") e.preventDefault(); });
+    $("[data-finder-toggle]", finder).addEventListener("click", () => {
+      const open = !finder.classList.contains("is-open");
+      setFinderOpen(open);
+      if (open) q.focus();
+    });
+  }
+
   /* Flash-card deck: one question per card. Without JS the steps render as a normal form. */
   const LABELS = { name: "Name", org: "Organisation", phone: "Phone", email: "Email", city: "City", category: "Looking for", message: "Notes" };
   function initDeck(form) {
